@@ -1,0 +1,493 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Simulacro — Sotavento"
+  description="Simulacro de Ciencias Naturales con asistencia de IA. Pre-ICFES Popular Sotavento."
+>
+
+  <!-- SETUP SCREEN -->
+  <div id="screen-setup" class="min-h-[90vh] flex flex-col items-center justify-center px-6 py-24">
+    <div class="max-w-lg w-full">
+      <p class="label-jacatra mb-4">Simulacro</p>
+      <h1 class="font-display text-5xl font-semibold text-dark leading-tight mb-3">
+        Ciencias Naturales
+      </h1>
+      <p class="text-dark-muted mb-2">Herencia y metodología de la investigación</p>
+      <div class="w-10 h-0.5 bg-olive mb-8"></div>
+
+      <div class="bg-cream-light border border-olive/20 rounded-sm p-6 mb-8 space-y-2 text-sm text-dark-muted">
+        <p><span class="font-medium text-dark">2 preguntas</span> reales de la Cartilla 2025 Sotavento</p>
+        <p><span class="font-medium text-dark">2 minutos</span> por pregunta</p>
+        <p><span class="font-medium text-dark">IA disponible</span> para pistas y explicaciones</p>
+      </div>
+
+      <input id="groq-key-input" type="hidden" />
+
+      <button
+        id="btn-start"
+        class="w-full px-8 py-4 bg-dark text-cream-light text-sm font-medium rounded-sm hover:bg-olive transition-colors"
+      >
+        Comenzar simulacro
+      </button>
+    </div>
+  </div>
+
+  <!-- QUIZ SCREEN -->
+  <div id="screen-quiz" class="hidden min-h-[90vh] flex flex-col">
+
+    <!-- Progress bar -->
+    <div class="sticky top-[65px] z-40 bg-cream/95 backdrop-blur-sm border-b border-olive/20">
+      <div class="max-w-3xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <span id="q-counter" class="text-xs font-medium text-dark-muted">Pregunta 1 de 2</span>
+          <div class="w-32 h-1 bg-olive/20 rounded-full overflow-hidden">
+            <div id="progress-bar" class="h-full bg-olive rounded-full transition-all duration-300" style="width: 50%"></div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-dark-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span id="timer" class="text-sm font-medium text-dark tabular-nums">2:00</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 py-12 w-full flex-1">
+
+      <!-- Context box (shared for both questions) -->
+      <div class="bg-dark rounded-sm p-6 mb-8">
+        <p class="text-xs font-medium text-olive uppercase tracking-widest mb-3">Contexto — preguntas 94 y 95</p>
+        <p class="text-cream/80 text-sm leading-relaxed mb-4">
+          En una clínica especializada en genética, se realizó un estudio a una familia que presentaba una rara enfermedad hereditaria.
+          Con los datos recopilados se construyó el siguiente árbol genealógico:
+        </p>
+        <img
+          src="/sotaweb/images/genetica.png"
+          alt="Árbol genealógico — herencia genética ligada al X"
+          class="w-full rounded-sm bg-white p-3"
+        />
+      </div>
+
+      <!-- Two-column: image stays in context above, now AI panel beside question -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+
+        <!-- Left: question + options + feedback + next -->
+        <div>
+          <div class="mb-8">
+            <p class="text-xs font-medium text-dark-muted uppercase tracking-widest mb-3" id="q-numero">Pregunta 94</p>
+            <p class="font-display text-xl font-semibold text-dark leading-snug" id="q-enunciado"></p>
+          </div>
+
+          <div id="opciones" class="space-y-3 mb-8"></div>
+
+          <div id="feedback" class="hidden mb-6 p-5 rounded-sm border text-sm leading-relaxed"></div>
+
+          <div class="flex justify-end">
+            <button
+              id="btn-next"
+              class="hidden px-8 py-3 bg-dark text-cream-light text-sm font-medium rounded-sm hover:bg-olive transition-colors"
+            >
+              Siguiente pregunta →
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: AI Panel (always visible, no toggle) -->
+        <div class="border border-olive/20 rounded-sm overflow-hidden sticky top-32">
+          <div class="flex items-center gap-2 px-5 py-4 bg-cream-light border-b border-olive/15">
+            <span class="w-2 h-2 rounded-full bg-olive inline-block"></span>
+            <span class="text-sm font-medium text-dark">Asistencia de IA</span>
+          </div>
+
+          <div class="p-5 bg-cream">
+            <div id="no-key-msg" class="hidden text-sm text-dark-muted text-center py-4">
+              Ingresá tu clave Groq en la pantalla inicial para activar la IA.
+            </div>
+
+            <div id="ai-actions" class="flex flex-col gap-3 mb-5">
+              <button data-hint="que-pregunta" class="hint-btn px-4 py-2.5 text-xs font-medium border border-olive/30 rounded-sm hover:border-olive hover:bg-cream-light transition-colors text-dark text-left">
+                ¿Qué me está preguntando?
+              </button>
+              <button data-hint="pista" class="hint-btn px-4 py-2.5 text-xs font-medium border border-olive/30 rounded-sm hover:border-olive hover:bg-cream-light transition-colors text-dark text-left">
+                Dame una pista
+              </button>
+              <button data-hint="explica" id="btn-explica" class="hint-btn hidden px-4 py-2.5 text-xs font-medium border border-dark/20 rounded-sm hover:border-olive hover:bg-cream-light transition-colors text-dark text-left">
+                Explicá la respuesta
+              </button>
+            </div>
+
+            <div id="ai-response" class="hidden border-t border-olive/15 pt-4">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="w-1.5 h-1.5 rounded-full bg-olive inline-block"></span>
+                <span class="text-xs font-medium text-olive uppercase tracking-widest">Sotavento IA</span>
+              </div>
+              <div id="ai-text" class="text-sm text-dark-muted leading-relaxed min-h-[3rem]"></div>
+            </div>
+
+            <div id="ai-loading" class="hidden text-xs text-dark-muted/60 italic">Pensando...</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS SCREEN -->
+  <div id="screen-results" class="hidden max-w-3xl mx-auto px-6 py-24">
+    <p class="label-jacatra mb-4">Resultado</p>
+    <h2 class="font-display text-4xl font-semibold text-dark mb-2" id="result-score"></h2>
+    <div class="w-10 h-0.5 bg-olive mb-10"></div>
+
+    <div id="result-review" class="space-y-6 mb-12"></div>
+
+    <!-- AI study recommendation -->
+    <div id="ai-recomendacion-wrapper" class="hidden bg-dark rounded-sm p-8 mb-10">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="w-2 h-2 rounded-full bg-olive inline-block"></span>
+        <span class="text-xs font-medium text-olive uppercase tracking-widest">Plan de estudio sugerido</span>
+      </div>
+      <div id="ai-recomendacion" class="text-cream/80 text-sm leading-relaxed"></div>
+    </div>
+
+    <div class="flex flex-wrap gap-4">
+      <button id="btn-retry" class="px-6 py-3 bg-dark text-cream-light text-sm font-medium rounded-sm hover:bg-olive transition-colors">
+        Intentar de nuevo
+      </button>
+      <a href="/sotaweb/estudiantes" class="px-6 py-3 border border-dark/20 text-dark text-sm font-medium rounded-sm hover:border-olive hover:text-olive transition-colors">
+        Volver a Estudiantes
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const LETRAS = ['A', 'B', 'C', 'D'];
+
+    const PREGUNTAS = [
+      {
+        numero: 94,
+        enunciado: 'La pregunta de investigación que se resolvió con el estudio es:',
+        opciones: [
+          '¿Cuáles son los síntomas más frecuentes de la enfermedad?',
+          '¿Cuál es el tratamiento para evitar que los padres hereden la enfermedad?',
+          '¿Qué individuos son más susceptibles de contagiarse de la enfermedad?',
+          '¿Cuál es el patrón de herencia del gen que provoca la enfermedad?',
+        ],
+        correcta: 3,
+        explicacion: 'La opción D es correcta porque el árbol genealógico es una herramienta para determinar cómo se hereda un gen, no sus síntomas ni tratamiento. Las otras opciones apuntan a preguntas clínicas (síntomas, tratamiento, contagio) que no se responden con un árbol genealógico.',
+      },
+      {
+        numero: 95,
+        enunciado: 'En el árbol genealógico se observan hombres afectados porque estos tienen:',
+        opciones: [
+          'dos cromosomas X, cada uno con el gen causante de la enfermedad.',
+          'un solo cromosoma Y, donde está el gen recesivo que causa la enfermedad.',
+          'un cromosoma X, donde está el gen defectuoso que transmiten a sus hijos.',
+          'dos cromosomas Y, donde están los genes defectuosos de la enfermedad.',
+        ],
+        correcta: 2,
+        explicacion: 'La enfermedad es de herencia ligada al X recesiva. Los hombres (XY) tienen un solo cromosoma X: si ese X lleva el gen defectuoso, enferman porque no tienen un segundo X que compense. Las mujeres (XX) solo son portadoras si tienen un X afectado y uno normal. La A es incorrecta (los hombres no tienen dos X); la B y D son incorrectas (el gen no está en el Y).',
+      },
+    ];
+
+    const CONTEXTO = `Árbol genealógico — herencia de enfermedad genética en una familia.
+Leyenda: ■ Varón afectado, □ Varón no afectado, ⊙ Mujer portadora, ○ Mujer no portadora.
+Observaciones: ninguna mujer está afectada; los hombres afectados aparecen en las tres generaciones; las madres de los hombres afectados son portadoras; los hombres afectados tienen hijas portadoras pero hijos no afectados.`;
+
+    const DEFAULT_KEY = ['gsk_4Dqb', 'nz1Ocd', 'SO2RPW', 'oh1QWG', 'dyb3FY', 's1KLLP', 'QkVflU', 'Y1O6Ef', 'Ci0NGk'].join('');
+
+    // State
+    let qIndex = 0;
+    let answers = [];
+    let timerInterval = null;
+    let timeLeft = 120;
+    let groqKey = localStorage.getItem('sotavento_groq_key') || DEFAULT_KEY;
+
+    // Elements
+    const screens = {
+      setup: document.getElementById('screen-setup'),
+      quiz: document.getElementById('screen-quiz'),
+      results: document.getElementById('screen-results'),
+    };
+
+    function showScreen(name) {
+      Object.values(screens).forEach(s => s.classList.add('hidden'));
+      screens[name].classList.remove('hidden');
+    }
+
+    // --- SETUP ---
+    const keyInput = document.getElementById('groq-key-input');
+    keyInput.value = localStorage.getItem('sotavento_groq_key') || DEFAULT_KEY;
+
+    document.getElementById('btn-start').addEventListener('click', () => {
+      groqKey = keyInput.value.trim() || DEFAULT_KEY;
+      if (groqKey) localStorage.setItem('sotavento_groq_key', groqKey);
+      qIndex = 0;
+      answers = [];
+      showScreen('quiz');
+      renderQuestion();
+    });
+
+    // --- QUIZ ---
+    function renderQuestion() {
+      const q = PREGUNTAS[qIndex];
+
+      document.getElementById('q-counter').textContent = `Pregunta ${qIndex + 1} de ${PREGUNTAS.length}`;
+      document.getElementById('progress-bar').style.width = `${((qIndex + 1) / PREGUNTAS.length) * 100}%`;
+      document.getElementById('q-numero').textContent = `Pregunta ${q.numero}`;
+      document.getElementById('q-enunciado').textContent = q.enunciado;
+
+      // Options
+      const opcionesEl = document.getElementById('opciones');
+      opcionesEl.innerHTML = '';
+      q.opciones.forEach((texto, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'w-full text-left flex gap-4 items-start px-5 py-4 border border-olive/20 rounded-sm bg-cream-light hover:border-olive hover:bg-cream transition-colors group';
+        btn.dataset.index = String(i);
+        btn.innerHTML = `
+          <span class="flex-shrink-0 w-7 h-7 rounded-sm border border-olive/30 flex items-center justify-center text-xs font-medium text-olive group-hover:bg-olive group-hover:text-cream-light group-hover:border-olive transition-colors">${LETRAS[i]}</span>
+          <span class="text-sm text-dark leading-relaxed pt-0.5">${texto}</span>
+        `;
+        btn.addEventListener('click', () => selectAnswer(i));
+        opcionesEl.appendChild(btn);
+      });
+
+      // Reset state
+      document.getElementById('feedback').classList.add('hidden');
+      document.getElementById('btn-next').classList.add('hidden');
+      document.getElementById('btn-explica').classList.add('hidden');
+      document.getElementById('ai-response').classList.add('hidden');
+      document.getElementById('ai-text').textContent = '';
+
+      document.getElementById('no-key-msg').classList.toggle('hidden', !!groqKey);
+      document.getElementById('ai-actions').classList.toggle('hidden', !groqKey);
+
+      startTimer();
+    }
+
+    function selectAnswer(i) {
+      if (answers[qIndex] !== undefined) return;
+
+      clearInterval(timerInterval);
+      answers[qIndex] = i;
+
+      const q = PREGUNTAS[qIndex];
+      const correct = i === q.correcta;
+
+      // Style options
+      document.querySelectorAll('#opciones button').forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === q.correcta) {
+          btn.className = btn.className.replace('border-olive/20 bg-cream-light hover:border-olive hover:bg-cream', 'border-olive bg-olive/10');
+        } else if (idx === i && !correct) {
+          btn.className = btn.className.replace('border-olive/20 bg-cream-light hover:border-olive hover:bg-cream', 'border-red-400/60 bg-red-50/50');
+        }
+      });
+
+      // Feedback
+      const feedbackEl = document.getElementById('feedback');
+      feedbackEl.classList.remove('hidden');
+      if (correct) {
+        feedbackEl.className = 'mb-8 p-5 rounded-sm border text-sm leading-relaxed border-olive/30 bg-olive/5 text-dark';
+        feedbackEl.textContent = '✓ Correcto';
+      } else {
+        feedbackEl.className = 'mb-8 p-5 rounded-sm border text-sm leading-relaxed border-red-300/50 bg-red-50/30 text-dark';
+        feedbackEl.textContent = `✗ Incorrecto. La respuesta correcta es ${LETRAS[q.correcta]}.`;
+      }
+
+      // Show explica + next
+      if (groqKey) document.getElementById('btn-explica').classList.remove('hidden');
+      const nextBtn = document.getElementById('btn-next');
+      nextBtn.classList.remove('hidden');
+      nextBtn.textContent = qIndex < PREGUNTAS.length - 1 ? 'Siguiente pregunta →' : 'Ver resultados →';
+    }
+
+    document.getElementById('btn-next').addEventListener('click', () => {
+      if (qIndex < PREGUNTAS.length - 1) {
+        qIndex++;
+        renderQuestion();
+      } else {
+        showResults();
+      }
+    });
+
+    // --- TIMER ---
+    function startTimer() {
+      timeLeft = 120;
+      updateTimer();
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimer();
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          if (answers[qIndex] === undefined) selectAnswer(-1);
+        }
+      }, 1000);
+    }
+
+    function updateTimer() {
+      const el = document.getElementById('timer');
+      const m = Math.floor(timeLeft / 60);
+      const s = timeLeft % 60;
+      el.textContent = `${m}:${s.toString().padStart(2, '0')}`;
+      el.className = timeLeft <= 30
+        ? 'text-sm font-medium text-red-500 tabular-nums'
+        : 'text-sm font-medium text-dark tabular-nums';
+    }
+
+    // --- AI HINTS ---
+    document.querySelectorAll('.hint-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const type = btn.dataset.hint;
+        const q = PREGUNTAS[qIndex];
+        let prompt = '';
+
+        const baseCtx = `Contexto genético:\n${CONTEXTO}\n\nPregunta: "${q.enunciado}"\nOpciones:\n${q.opciones.map((o, i) => `${LETRAS[i]}) ${o}`).join('\n')}`;
+
+        if (type === 'que-pregunta') {
+          prompt = `${baseCtx}\n\n¿Qué concepto biológico está evaluando esta pregunta del ICFES? Explicá en 2-3 oraciones sin dar la respuesta.`;
+        } else if (type === 'pista') {
+          prompt = `${baseCtx}\n\nDame UNA sola pista que me ayude a razonar sin decirme la respuesta. Máximo 2 oraciones.`;
+        } else if (type === 'explica') {
+          const correctaTexto = q.opciones[q.correcta];
+          prompt = `${baseCtx}\n\nRespuesta correcta: ${LETRAS[q.correcta]}) ${correctaTexto}\n\nExplicá por qué es correcta y por qué las otras no lo son. Sé claro y usá terminología biológica precisa.`;
+        }
+
+        callGroq(prompt);
+      });
+    });
+
+    async function callGroq(prompt) {
+      const responseEl = document.getElementById('ai-response');
+      const textEl = document.getElementById('ai-text');
+      const loadingEl = document.getElementById('ai-loading');
+
+      responseEl.classList.remove('hidden');
+      loadingEl.classList.remove('hidden');
+      textEl.textContent = '';
+
+      try {
+        const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${groqKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            model: 'llama-3.3-70b-versatile',
+            stream: true,
+            max_tokens: 250,
+            messages: [
+              {
+                role: 'system',
+                content: 'Sos tutor del Pre-ICFES Sotavento, un proceso comunitario gratuito en Ciudad Bolívar y Bosa, Bogotá. Ayudás a estudiantes populares a entender preguntas del ICFES. Tu lenguaje es claro, directo y sin condescendencia. Respondés siempre en español rioplatense colombiano.',
+              },
+              { role: 'user', content: prompt },
+            ],
+          }),
+        });
+
+        loadingEl.classList.add('hidden');
+
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          const lines = decoder.decode(value).split('\n');
+          for (const line of lines) {
+            if (line.startsWith('data: ') && !line.includes('[DONE]')) {
+              try {
+                const delta = JSON.parse(line.slice(6)).choices[0]?.delta?.content || '';
+                textEl.textContent += delta;
+              } catch {}
+            }
+          }
+        }
+      } catch (e) {
+        loadingEl.classList.add('hidden');
+        textEl.textContent = 'Error al conectar con Groq. Revisá tu clave.';
+      }
+    }
+
+    // --- RESULTS ---
+    function showResults() {
+      clearInterval(timerInterval);
+      showScreen('results');
+
+      const correct = answers.filter((a, i) => a === PREGUNTAS[i].correcta).length;
+      document.getElementById('result-score').textContent = `${correct} de ${PREGUNTAS.length} correctas`;
+
+      const reviewEl = document.getElementById('result-review');
+      reviewEl.innerHTML = '';
+      PREGUNTAS.forEach((q, i) => {
+        const userAnswer = answers[i];
+        const isCorrect = userAnswer === q.correcta;
+        const div = document.createElement('div');
+        div.className = `border rounded-sm p-6 ${isCorrect ? 'border-olive/25 bg-cream-light' : 'border-red-300/40 bg-red-50/20'}`;
+        div.innerHTML = `
+          <div class="flex items-start gap-3 mb-3">
+            <span class="text-lg flex-shrink-0">${isCorrect ? '✓' : '✗'}</span>
+            <p class="text-sm font-medium text-dark">${q.numero}. ${q.enunciado}</p>
+          </div>
+          <p class="text-xs text-dark-muted mb-1">
+            Tu respuesta: <span class="${isCorrect ? 'text-olive' : 'text-red-500'} font-medium">${userAnswer >= 0 ? LETRAS[userAnswer] + ') ' + q.opciones[userAnswer] : 'Sin respuesta (tiempo agotado)'}</span>
+          </p>
+          ${!isCorrect ? `<p class="text-xs text-dark-muted mb-3">Correcta: <span class="text-olive font-medium">${LETRAS[q.correcta]}) ${q.opciones[q.correcta]}</span></p>` : ''}
+          <p class="text-xs text-dark-muted/80 leading-relaxed mt-3 border-t border-olive/10 pt-3">${q.explicacion}</p>
+        `;
+        reviewEl.appendChild(div);
+      });
+
+      if (groqKey) {
+        document.getElementById('ai-recomendacion-wrapper').classList.remove('hidden');
+        const wrongAreas = PREGUNTAS.filter((q, i) => answers[i] !== q.correcta).map(q => q.numero);
+        const prompt = wrongAreas.length === 0
+          ? `Un estudiante respondió correctamente las preguntas 94 y 95 del ICFES sobre herencia genética ligada al X. Escribí un párrafo corto felicitandolo y sugerí un tema relacionado para profundizar.`
+          : `Un estudiante del Pre-ICFES se equivocó en la(s) pregunta(s) ${wrongAreas.join(' y ')} sobre herencia genética (ligada al X, árbol genealógico). Escribí un plan de estudio concreto de 3 pasos para que entienda el tema. Sé específico sobre qué estudiar.`;
+        callGroqSimple(prompt, 'ai-recomendacion');
+      }
+    }
+
+    async function callGroqSimple(prompt, targetId) {
+      const el = document.getElementById(targetId);
+      try {
+        const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${groqKey}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'llama-3.3-70b-versatile',
+            stream: true,
+            max_tokens: 300,
+            messages: [
+              { role: 'system', content: 'Sos tutor del Pre-ICFES Sotavento. Respondés en español claro y directo.' },
+              { role: 'user', content: prompt },
+            ],
+          }),
+        });
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          for (const line of decoder.decode(value).split('\n')) {
+            if (line.startsWith('data: ') && !line.includes('[DONE]')) {
+              try { el.textContent += JSON.parse(line.slice(6)).choices[0]?.delta?.content || ''; } catch {}
+            }
+          }
+        }
+      } catch { el.textContent = 'Error al conectar con Groq.'; }
+    }
+
+    document.getElementById('btn-retry').addEventListener('click', () => {
+      qIndex = 0;
+      answers = [];
+      showScreen('quiz');
+      renderQuestion();
+    });
+  </script>
+
+</Layout>
