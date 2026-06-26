@@ -8,7 +8,7 @@ const requisitos = [
   },
   {
     titulo: 'Saber que quieras compartir',
-    descripcion: 'No se necesita título universitario. Sí se necesita dominio de alguna de las áreas del ICFES (matemáticas, lectura crítica, ciencias, sociales, inglés) y ganas de compartirlo.',
+    descripcion: 'No se necesita título universitario. Sí se necesita dominio de alguna de las áreas del ICFES y ganas de compartirlo.',
   },
   {
     titulo: 'Identificación con la educación popular',
@@ -35,31 +35,37 @@ const areas = [
   description="Sumate al Pre-ICFES Sotavento como educadore popular en Ciudad Bolívar o Bosa."
 >
 
-  <!-- Header -->
-  <section class="relative overflow-hidden pt-20 pb-16">
-    <div class="absolute top-10 right-10 w-40 h-40 rounded-full bg-olive/10 pointer-events-none"></div>
-    <div class="absolute top-16 right-16 w-20 h-20 rounded-full border-2 border-dark/10 pointer-events-none"></div>
-    <div class="absolute bottom-0 left-0 w-28 h-28 rounded-full border-2 border-olive/20 -translate-x-1/3 pointer-events-none"></div>
+  <!-- Header: tres-golpes as background — Colombian barrio culture -->
+  <section class="relative overflow-hidden min-h-[60vh] flex items-end">
+    <div
+      class="absolute inset-0 bg-cover bg-center"
+      style="background-image: url('/sotaweb/images/tres-golpes.jpg');"
+    ></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/65 to-dark/25"></div>
 
-    <div class="max-w-5xl mx-auto px-6">
+    <div class="relative max-w-5xl mx-auto px-6 pb-16 pt-32 w-full">
       <p class="text-xs font-semibold uppercase tracking-widest text-olive mb-4">Voluntarixs</p>
-      <h1 class="font-display text-5xl md:text-7xl font-semibold text-dark leading-tight mb-6 max-w-xl">
+      <h1 class="font-display text-5xl md:text-7xl font-semibold text-cream-light leading-tight mb-4 max-w-xl">
         Ser educadore<br /><em class="not-italic text-olive">popular</em>
       </h1>
-      <div class="w-16 h-0.5 bg-olive mb-8"></div>
-      <p class="text-lg text-dark-muted leading-relaxed max-w-2xl">
-        En Sotavento no hay profesores contratados. El proceso lo sostienen voluntarixs
-        que entienden que enseñar es también aprender, y que la educación
-        puede ser un acto político de resistencia.
-      </p>
+      <div class="w-16 h-0.5 bg-olive"></div>
     </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="max-w-5xl mx-auto px-6 py-16">
+    <p class="text-lg text-dark-muted leading-relaxed max-w-3xl">
+      En Sotavento no hay profesores contratados. El proceso lo sostienen voluntarixs
+      que entienden que enseñar es también aprender, y que la educación
+      puede ser un acto político de resistencia.
+    </p>
   </section>
 
   <div class="max-w-5xl mx-auto px-6">
     <div class="h-px bg-olive/25"></div>
   </div>
 
-  <!-- Qué significa -->
+  <!-- Qué significa ser educadore + areas -->
   <section class="max-w-5xl mx-auto px-6 py-20">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
       <div>
@@ -71,8 +77,8 @@ const areas = [
         <div class="space-y-5 text-dark-muted leading-relaxed">
           <p>
             No es dar clase magistral. Es construir espacios donde lxs estudiantes
-            puedan pensar, cuestionar y apropiarse del conocimiento que necesitan
-            para presentar el ICFES — sin abandonar una mirada crítica sobre el mundo.
+            puedan pensar, cuestionar y apropiarse del conocimiento que necesitan —
+            sin abandonar una mirada crítica sobre el mundo.
           </p>
           <p>
             Implica participar de la <strong class="text-dark font-medium">Escuela de educadoras y educadores populares</strong>
@@ -86,16 +92,29 @@ const areas = [
         </div>
       </div>
 
-      <div class="space-y-4">
-        <p class="text-xs font-semibold uppercase tracking-widest text-olive mb-4">Áreas que necesitamos</p>
-        <div class="grid grid-cols-2 gap-3">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-widest text-olive mb-5">Áreas que necesitamos</p>
+        <div class="grid grid-cols-2 gap-3 mb-10">
           {areas.map((area) => (
-            <div class="flex items-center gap-3 p-4 border border-olive/20 rounded-sm hover:border-olive/50 transition-colors">
+            <div class="flex items-center gap-3 p-4 border border-olive/20 rounded-sm hover:border-olive/50 hover:bg-cream-light transition-colors">
               <div class="w-2 h-2 rounded-full bg-olive flex-shrink-0"></div>
               <span class="text-sm font-medium text-dark">{area}</span>
             </div>
           ))}
         </div>
+
+        <!-- Soviet education poster as decorative element -->
+        <figure class="relative">
+          <img
+            src="/sotaweb/images/espacio.jpg"
+            alt="Poster soviético sobre la ciencia y el conocimiento popular"
+            class="w-full rounded-sm object-cover grayscale opacity-70"
+            style="max-height: 220px; object-position: top;"
+          />
+          <figcaption class="mt-2 text-xs text-dark-muted italic text-right">
+            Слава советской науке — La ciencia es de todxs
+          </figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -112,9 +131,9 @@ const areas = [
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {requisitos.map((req, i) => (
-          <div class="bg-cream p-8 rounded-sm border border-olive/10">
+          <div class="bg-cream p-8 rounded-sm border border-olive/10 hover:border-olive/30 transition-colors">
             <div class="flex items-start gap-4 mb-4">
-              <span class="font-display text-4xl font-semibold text-olive/40 leading-none flex-shrink-0">
+              <span class="font-display text-4xl font-semibold text-olive/35 leading-none flex-shrink-0">
                 {String(i + 1).padStart(2, '0')}
               </span>
               <h3 class="font-display text-xl font-semibold text-dark leading-snug pt-1">
@@ -131,6 +150,7 @@ const areas = [
   <!-- Cómo unirse -->
   <section class="max-w-5xl mx-auto px-6 py-24">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+
       <div>
         <p class="text-xs font-semibold uppercase tracking-widest text-olive mb-4">¿Cómo doy el paso?</p>
         <h2 class="font-display text-4xl font-semibold text-dark leading-tight mb-6">
@@ -162,17 +182,15 @@ const areas = [
         </div>
       </div>
 
-      <div class="relative">
-        <div class="absolute -top-8 -right-8 w-40 h-40 rounded-full bg-olive/10 pointer-events-none"></div>
-        <blockquote class="relative bg-dark text-cream-light p-10 rounded-sm">
-          <p class="font-display text-xl italic leading-relaxed mb-4 text-cream/80">
-            "Nosotros, los de abajo, escribiremos la historia y la memoria con tinta indeleble."
-          </p>
-          <footer class="text-olive text-sm font-medium">
-            Sotavento Popular, 2017
-          </footer>
-        </blockquote>
-      </div>
+      <blockquote class="bg-dark text-cream-light p-10 rounded-sm">
+        <p class="font-display text-xl italic leading-relaxed mb-4 text-cream/80">
+          "Nosotros, los de abajo, escribiremos la historia y la memoria con tinta indeleble."
+        </p>
+        <footer class="text-olive text-sm font-medium">
+          Sotavento Popular, 2017
+        </footer>
+      </blockquote>
+
     </div>
   </section>
 
