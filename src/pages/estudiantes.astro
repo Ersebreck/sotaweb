@@ -1,0 +1,276 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const areas = [
+  {
+    titulo: 'Lectura crítica',
+    descripcion: 'Comprensión lectora, análisis de textos, argumentación y pensamiento crítico. Herramientas para leer el mundo.',
+    icono: '📖',
+    tipo: null,
+    url: null,
+  },
+  {
+    titulo: 'Matemáticas',
+    descripcion: 'Razonamiento cuantitativo, álgebra, geometría y estadística. Desde los fundamentos hasta los ejercicios de la prueba.',
+    icono: '∑',
+    tipo: null,
+    url: null,
+  },
+  {
+    titulo: 'Ciencias naturales',
+    descripcion: 'Biología, química y física: conceptos clave, resolución de problemas y comprensión del entorno natural.',
+    icono: '⚗',
+    tipo: null,
+    url: null,
+  },
+  {
+    titulo: 'Ciencias sociales',
+    descripcion: 'Historia, geografía, economía y política. Una lectura crítica del pasado y del presente.',
+    icono: '🌎',
+    tipo: null,
+    url: null,
+  },
+  {
+    titulo: 'Inglés',
+    descripcion: 'Comprensión de lectura en inglés, vocabulario y estructuras gramaticales básicas para la prueba.',
+    icono: 'Aa',
+    tipo: null,
+    url: null,
+  },
+  {
+    titulo: 'Competencias ciudadanas',
+    descripcion: 'Convivencia, participación, pluralidad y derechos. La ciudadanía como ejercicio político cotidiano.',
+    icono: '⚖',
+    tipo: null,
+    url: null,
+  },
+];
+
+const simulacros = [
+  { area: 'Lectura crítica', url: null },
+  { area: 'Matemáticas', url: null },
+  { area: 'Ciencias naturales', url: null },
+  { area: 'Ciencias sociales', url: null },
+  { area: 'Inglés', url: null },
+  { area: 'Competencias ciudadanas', url: null },
+];
+---
+
+<Layout
+  title="Estudiantes — Sotavento"
+  description="Material de estudio, simulacros e inscripción al Pre-ICFES Popular y Comunitario Sotavento."
+>
+
+  <!-- Header: random poster rotation -->
+  <section class="relative overflow-hidden flex items-end">
+    <img
+      id="estudiantes-hero-img"
+      src=""
+      alt="Poster del proceso"
+      class="w-full h-auto block max-h-[100svh] object-contain object-top"
+    />
+    <script>
+      const imgs = ['/sotaweb/images/cientificas.png', '/sotaweb/images/poetas.png', '/sotaweb/images/ingenierxs.png'];
+      const pick = imgs[Math.floor(Math.random() * imgs.length)];
+      document.getElementById('estudiantes-hero-img').src = pick;
+    </script>
+    <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent"></div>
+
+    <div class="absolute bottom-0 left-0 right-0 max-w-5xl mx-auto px-6 pb-16 w-full">
+      <p class="label-jacatra mb-4">Estudiantes</p>
+      <h1 class="font-display text-5xl md:text-7xl font-semibold text-cream-light leading-tight mb-4 max-w-xl">
+        Tu herramienta<br /><em class="not-italic text-olive">de estudio</em>
+      </h1>
+      <div class="w-16 h-0.5 bg-olive"></div>
+    </div>
+  </section>
+
+  <!-- Tab bar -->
+  <div class="sticky top-[65px] z-40 bg-cream/95 backdrop-blur-sm border-b border-olive/20">
+    <div class="max-w-5xl mx-auto px-6">
+      <ul class="flex gap-8">
+        {[
+          { id: 'tab-contenido', label: 'Contenido' },
+          { id: 'tab-simulacros', label: 'Simulacros' },
+          { id: 'tab-inscribete', label: 'Inscribete' },
+        ].map(({ id, label }, i) => (
+          <li>
+            <button
+              data-tab={id}
+              class={`tab-btn py-4 text-sm font-medium transition-colors border-b-2 -mb-px ${
+                i === 0
+                  ? 'text-olive border-olive'
+                  : 'text-dark-muted border-transparent hover:text-olive'
+              }`}
+            >
+              {label}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Material por área -->
+  <section id="tab-contenido" class="max-w-5xl mx-auto px-6 py-20">
+    <p class="label-jacatra mb-4">Contenido</p>
+    <h2 class="font-display text-4xl font-semibold text-dark mb-12 leading-tight">
+      Seis áreas, un mismo proceso
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {areas.map((area) => (
+        <div class={`group relative flex flex-col border rounded-sm p-7 transition-colors ${
+          area.url
+            ? 'border-olive/25 hover:border-olive bg-cream-light hover:bg-cream cursor-pointer'
+            : 'border-olive/15 bg-cream-light'
+        }`}>
+          <div class="w-12 h-12 rounded-sm bg-olive/10 border border-olive/20 flex items-center justify-center mb-5 text-xl font-display font-semibold text-olive">
+            {area.icono}
+          </div>
+          <h3 class="font-display text-xl font-semibold text-dark mb-2 leading-snug">
+            {area.titulo}
+          </h3>
+          <p class="text-sm text-dark-muted leading-relaxed flex-1">
+            {area.descripcion}
+          </p>
+          <div class="mt-6">
+            {area.url ? (
+              <a
+                href={area.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 text-sm font-medium text-olive hover:text-olive-dark transition-colors"
+              >
+                {area.tipo === 'notebooklm' ? 'Abrir en NotebookLM' : 'Ver material'}
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            ) : (
+              <span class="inline-flex items-center gap-2 text-xs font-medium text-dark-muted/60 border border-dashed border-dark/15 rounded-sm px-3 py-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-olive/40 inline-block"></span>
+                Próximamente
+              </span>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Simulacros -->
+  <section id="tab-simulacros" class="hidden bg-dark py-20 relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-48 h-48 rounded-full border border-cream/5 translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
+
+    <div class="max-w-5xl mx-auto px-6">
+      <p class="label-jacatra mb-4">Simulacros</p>
+      <h2 class="font-display text-4xl font-semibold text-cream-light mb-4 leading-tight">
+        Practica antes del día
+      </h2>
+      <p class="text-cream/60 text-sm leading-relaxed mb-12 max-w-xl">
+        Simulacros cronometrados por área, con las mismas condiciones de la prueba real.
+        Próximamente disponibles por Google Forms.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {simulacros.map(({ area, url }) => (
+          <div class={`border rounded-sm p-5 transition-colors ${url ? 'border-olive/40 hover:border-olive cursor-pointer' : 'border-cream/10'}`}>
+            <p class="text-sm font-medium text-cream/80 mb-3">{area}</p>
+            {url ? (
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-olive hover:text-olive-dark font-medium transition-colors"
+              >
+                Ir al simulacro →
+              </a>
+            ) : (
+              <span class="text-xs text-cream/30 border border-dashed border-cream/15 rounded-sm px-2 py-1 inline-block">
+                Próximamente
+              </span>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Inscripción -->
+  <section id="tab-inscribete" class="hidden max-w-5xl mx-auto px-6 py-24">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+
+      <div>
+        <p class="label-jacatra mb-4">Inscribete</p>
+        <h2 class="font-display text-4xl font-semibold text-dark leading-tight mb-6">
+          ¿Querés ser parte del pre-ICFES?
+        </h2>
+        <div class="w-10 h-0.5 bg-olive mb-6"></div>
+        <p class="text-dark-muted leading-relaxed mb-4">
+          El proceso es <strong class="text-dark font-medium">gratuito y presencial</strong>.
+          Tenemos sede en Ciudad Bolívar y en Bosa.
+          Las inscripciones abren cada semestre — escribinos por Instagram para saber
+          cuándo arranca el próximo ciclo.
+        </p>
+        <p class="text-dark-muted leading-relaxed mb-8">
+          No se necesita ningún requisito previo. Solo ganas de aprender y de ser parte
+          de un proceso comunitario.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href="https://instagram.com/sotaventopopular"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-3 bg-dark text-cream-light text-sm font-medium rounded-sm hover:bg-olive transition-colors text-center"
+          >
+            Escribinos por Instagram
+          </a>
+        </div>
+      </div>
+
+      <div class="bg-cream-light border border-olive/15 rounded-sm p-8 space-y-5">
+        <h3 class="font-display text-2xl font-semibold text-dark">¿Qué incluye el proceso?</h3>
+        <ul class="space-y-3">
+          {[
+            'Clases semanales por área, presenciales y gratuitas',
+            'Material de estudio construido por lxs profes voluntarixs',
+            'Simulacros cronometrados antes de la prueba',
+            'Acompañamiento colectivo durante todo el semestre',
+            'Conexión con el proceso político y cultural de Aguante Popular',
+          ].map((item) => (
+            <li class="flex gap-3 text-sm text-dark-muted">
+              <span class="w-1.5 h-1.5 rounded-full bg-olive flex-shrink-0 mt-2"></span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    const tabs = document.querySelectorAll<HTMLButtonElement>('.tab-btn');
+    const sections = ['tab-contenido', 'tab-simulacros', 'tab-inscribete'].map(
+      (id) => document.getElementById(id)!
+    );
+
+    tabs.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.tab!;
+
+        sections.forEach((sec) => sec.classList.add('hidden'));
+        document.getElementById(target)!.classList.remove('hidden');
+
+        tabs.forEach((b) => {
+          b.classList.remove('text-olive', 'border-olive');
+          b.classList.add('text-dark-muted', 'border-transparent');
+        });
+        btn.classList.remove('text-dark-muted', 'border-transparent');
+        btn.classList.add('text-olive', 'border-olive');
+      });
+    });
+  </script>
+
+</Layout>
