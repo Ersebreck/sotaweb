@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #EDE8DC;
+  --color-cream-light: #F5F1E8;
+  --color-olive: #8A8A50;
+  --color-olive-dark: #6B6B3E;
+  --color-dark: #1C1C28;
+  --color-dark-muted: #3C3C4E;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-dark);
+  font-family: var(--font-body);
+}

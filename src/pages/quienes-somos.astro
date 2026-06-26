@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const timeline = [
+  {
+    year: '2017',
+    items: ['Nace el parche como grupo de estudio popular en Ciudad Bolívar, con el fin de fortalecer procesos de memoria histórica para la defensa del territorio y la vida digna.'],
+  },
+  {
+    year: '2018',
+    items: ['Participación en el diplomado: Organización Popular y Derecho a la ciudad, apoyado por la UD y el IAPES.'],
+  },
+  {
+    year: '2019',
+    items: [
+      'Cine Foro Infantil en el Barrio San Isidro.',
+      'Participación en la Escuela Interlocal en DDHH y construcción de paz.',
+      'Paro Nacional 21N.',
+    ],
+  },
+  {
+    year: '2020',
+    items: [
+      'Escuela de educadoras y educadores populares.',
+      'Cátedra libre: el Aguante Popular.',
+      'Novenas populares.',
+      'CPL Ciudad Bolívar.',
+    ],
+  },
+  {
+    year: '2021',
+    items: [
+      'Pre-Icfes Popular y Comunitario CB.',
+      'Paro Nacional 28A.',
+      'Integración al Corredor Cultural y Humanitario CB.',
+      'Integración a Aguante Popular.',
+      'Escuela de Saberes Populares: Vida Digna.',
+    ],
+  },
+  {
+    year: '2022',
+    items: [
+      'Escuela de educadoras y educadores populares: Por los caminos de Freire.',
+      'Pre-Icfes Popular y Comunitario Ciudad Bolívar.',
+      'Escuela de Saberes Populares: Tejiendo vida, haciendo memoria.',
+      'Novenas Populares Aguante Popular.',
+    ],
+  },
+  {
+    year: '2023',
+    items: [
+      'II Cátedra Libre Construyendo Poder Popular: EP y transiciones políticas en América Latina.',
+      'Circuito Itinerante: caminando los barrios, construimos memoria.',
+      'Campaña edilatos Aguante Popular.',
+      'Novenas populares Aguante Popular.',
+    ],
+  },
+  {
+    year: '2024',
+    items: [
+      'Escuela de educadoras y educadores populares: La educación como praxis política.',
+      'Pre-Icfes Popular y Comunitario Pregón del Sur: Bosa y Ciudad Bolívar.',
+    ],
+  },
+  {
+    year: '2025',
+    items: [
+      'Escuela de educadoras y educadores populares: Educación Popular, apuesta necesaria para enfrentar la Crisis Civilizatoria.',
+      'PreIcfes Popular y Comunitario Sotavento.',
+      'PreIcfes Bibliotecario y Popular Sotavento.',
+    ],
+  },
+  {
+    year: '2026',
+    items: ['¡Se vienen cositas!'],
+  },
+];
+---
+
+<Layout
+  title="Quiénes somos — Sotavento"
+  description="Historia y marco político del Parche de Investigación Popular Sotavento."
+>
+
+  <!-- Header -->
+  <section class="relative overflow-hidden pt-20 pb-16">
+    <div class="absolute top-12 right-8 w-32 h-32 rounded-full border-2 border-dark/10 pointer-events-none"></div>
+    <div class="absolute top-20 right-12 w-16 h-16 rounded-full bg-olive/15 pointer-events-none"></div>
+
+    <div class="max-w-5xl mx-auto px-6">
+      <p class="text-xs font-semibold uppercase tracking-widest text-olive mb-4">Quiénes somos</p>
+      <h1 class="font-display text-5xl md:text-7xl font-semibold text-dark leading-tight mb-6 max-w-xl">
+        Un parche que<br /><em class="not-italic text-olive">piensa y actúa</em>
+      </h1>
+      <div class="w-16 h-0.5 bg-olive mb-8"></div>
+      <p class="text-lg text-dark-muted leading-relaxed max-w-2xl">
+        Somos el Parche de Investigación Popular Sotavento, parte del proceso de Aguante Popular.
+        Nacimos en Ciudad Bolívar en 2017 y desde entonces construimos educación popular
+        desde y para los barrios del sur de Bogotá.
+      </p>
+    </div>
+  </section>
+
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="h-px bg-olive/25"></div>
+  </div>
+
+  <!-- Marco político -->
+  <section class="max-w-5xl mx-auto px-6 py-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+
+      <div class="space-y-8">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-olive mb-4">Nuestra apuesta</p>
+          <h2 class="font-display text-4xl font-semibold text-dark leading-tight mb-6">
+            Lo popular como disputa por el poder
+          </h2>
+          <div class="w-10 h-0.5 bg-olive mb-6"></div>
+          <p class="text-dark-muted leading-relaxed">
+            No somos neutrales. Pensamos la educación como una herramienta de transformación social,
+            enraizada en las experiencias y saberes de los sectores populares.
+            Nos reconocemos como parte de "los de abajo" que escriben la historia con tinta indeleble.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-display text-2xl font-semibold text-dark mb-3">Educación Popular</h3>
+          <p class="text-dark-muted leading-relaxed">
+            Seguimos los caminos de Paulo Freire y las tradiciones latinoamericanas de educación popular.
+            Creemos que el conocimiento se construye colectivamente, que nadie educa a nadie,
+            y que los saberes de las comunidades tienen el mismo valor que los saberes académicos.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-display text-2xl font-semibold text-dark mb-3">Aguante Popular</h3>
+          <p class="text-dark-muted leading-relaxed">
+            Hacemos parte del proceso más amplio de Aguante Popular,
+            una organización política que trabaja en los territorios populares de Bogotá
+            por la defensa de la vida digna, el territorio y la memoria.
+          </p>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="absolute -top-6 -left-6 w-32 h-32 rounded-full bg-olive/10 pointer-events-none"></div>
+        <div class="absolute -top-2 -left-2 w-16 h-16 rounded-full border-2 border-olive/30 pointer-events-none"></div>
+        <blockquote class="relative bg-dark text-cream-light p-10 rounded-sm">
+          <p class="font-display text-2xl italic leading-relaxed mb-6">
+            "Y que mis venas no terminan en mí<br />
+            sino en la sangre unánime<br />
+            de los que luchan por la vida,<br />
+            el amor, las cosas,<br />
+            el paisaje y el pan,<br />
+            la poesía de todos."
+          </p>
+          <footer class="text-olive text-sm font-medium">
+            Roque Dalton — <em>Como tú</em>
+          </footer>
+        </blockquote>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="bg-dark py-20 relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-48 h-48 rounded-full border border-cream/5 translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-32 h-32 rounded-full bg-olive/15 -translate-x-1/4 translate-y-1/4 pointer-events-none"></div>
+
+    <div class="max-w-5xl mx-auto px-6">
+      <p class="text-xs font-semibold uppercase tracking-widest text-olive mb-4">Historia</p>
+      <h2 class="font-display text-4xl md:text-5xl font-semibold text-cream-light mb-16 leading-tight">
+        Línea de tiempo
+      </h2>
+
+      <div class="relative">
+        <!-- Vertical line -->
+        <div class="absolute left-[7px] top-2 bottom-2 w-px bg-olive/30 hidden md:block"></div>
+
+        <ol class="space-y-10">
+          {timeline.map(({ year, items }) => (
+            <li class="md:flex gap-8 group">
+              <div class="md:w-24 flex-shrink-0 flex md:flex-col items-center md:items-start gap-3 mb-3 md:mb-0">
+                <div class="w-4 h-4 rounded-full bg-olive border-2 border-dark flex-shrink-0 relative z-10"></div>
+                <span class="font-display text-2xl font-semibold text-olive">{year}</span>
+              </div>
+              <div class="flex-1 pb-4">
+                <ul class="space-y-2">
+                  {items.map((item) => (
+                    <li class="text-cream/70 text-sm leading-relaxed flex gap-2">
+                      <span class="text-olive/50 mt-1 flex-shrink-0">—</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+</Layout>

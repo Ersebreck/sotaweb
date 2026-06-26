@@ -1,0 +1,179 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const requisitos = [
+  {
+    titulo: 'Compromiso con el proceso',
+    descripcion: 'No buscamos profesores, buscamos compañerxs que construyan junto a lxs estudiantes. Se requiere constancia y disposición para participar del proceso más allá del aula.',
+  },
+  {
+    titulo: 'Saber que quieras compartir',
+    descripcion: 'No se necesita título universitario. Sí se necesita dominio de alguna de las áreas del ICFES (matemáticas, lectura crítica, ciencias, sociales, inglés) y ganas de compartirlo.',
+  },
+  {
+    titulo: 'Identificación con la educación popular',
+    descripcion: 'Entendemos la docencia como praxis política. Quienes se suman deben reconocerse en una apuesta por la educación como herramienta de transformación social.',
+  },
+  {
+    titulo: 'Ubicación en Bogotá',
+    descripcion: 'Los encuentros son presenciales en Ciudad Bolívar o Bosa. Es importante poder asistir regularmente a la sede del proceso.',
+  },
+];
+
+const areas = [
+  'Lectura crítica',
+  'Matemáticas',
+  'Ciencias naturales',
+  'Ciencias sociales',
+  'Inglés',
+  'Competencias ciudadanas',
+];
+---
+
+<Layout
+  title="Voluntarixs — Sotavento"
+  description="Sumate al Pre-ICFES Sotavento como educadore popular en Ciudad Bolívar o Bosa."
+>
+
+  <!-- Header -->
+  <section class="relative overflow-hidden pt-20 pb-16">
+    <div class="absolute top-10 right-10 w-40 h-40 rounded-full bg-olive/10 pointer-events-none"></div>
+    <div class="absolute top-16 right-16 w-20 h-20 rounded-full border-2 border-dark/10 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-28 h-28 rounded-full border-2 border-olive/20 -translate-x-1/3 pointer-events-none"></div>
+
+    <div class="max-w-5xl mx-auto px-6">
+      <p class="text-xs font-semibold uppercase tracking-widest text-olive mb-4">Voluntarixs</p>
+      <h1 class="font-display text-5xl md:text-7xl font-semibold text-dark leading-tight mb-6 max-w-xl">
+        Ser educadore<br /><em class="not-italic text-olive">popular</em>
+      </h1>
+      <div class="w-16 h-0.5 bg-olive mb-8"></div>
+      <p class="text-lg text-dark-muted leading-relaxed max-w-2xl">
+        En Sotavento no hay profesores contratados. El proceso lo sostienen voluntarixs
+        que entienden que enseñar es también aprender, y que la educación
+        puede ser un acto político de resistencia.
+      </p>
+    </div>
+  </section>
+
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="h-px bg-olive/25"></div>
+  </div>
+
+  <!-- Qué significa -->
+  <section class="max-w-5xl mx-auto px-6 py-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-widest text-olive mb-4">El rol</p>
+        <h2 class="font-display text-4xl font-semibold text-dark leading-tight mb-6">
+          ¿Qué significa ser educadore popular?
+        </h2>
+        <div class="w-10 h-0.5 bg-olive mb-6"></div>
+        <div class="space-y-5 text-dark-muted leading-relaxed">
+          <p>
+            No es dar clase magistral. Es construir espacios donde lxs estudiantes
+            puedan pensar, cuestionar y apropiarse del conocimiento que necesitan
+            para presentar el ICFES — sin abandonar una mirada crítica sobre el mundo.
+          </p>
+          <p>
+            Implica participar de la <strong class="text-dark font-medium">Escuela de educadoras y educadores populares</strong>
+            que corre en paralelo con el Pre-ICFES, donde nos formamos colectivamente
+            en pedagogía, territorio e historia popular.
+          </p>
+          <p>
+            Es también ser parte de Aguante Popular y de la vida del parche:
+            actividades, novenas, movilizaciones, comunicados.
+          </p>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <p class="text-xs font-semibold uppercase tracking-widest text-olive mb-4">Áreas que necesitamos</p>
+        <div class="grid grid-cols-2 gap-3">
+          {areas.map((area) => (
+            <div class="flex items-center gap-3 p-4 border border-olive/20 rounded-sm hover:border-olive/50 transition-colors">
+              <div class="w-2 h-2 rounded-full bg-olive flex-shrink-0"></div>
+              <span class="text-sm font-medium text-dark">{area}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Requisitos -->
+  <section class="bg-cream-light py-20 relative overflow-hidden">
+    <div class="absolute right-0 top-1/2 w-40 h-40 rounded-full bg-olive/10 translate-x-1/3 -translate-y-1/2 pointer-events-none"></div>
+
+    <div class="max-w-5xl mx-auto px-6">
+      <p class="text-xs font-semibold uppercase tracking-widest text-olive mb-4">Lo que buscamos</p>
+      <h2 class="font-display text-4xl font-semibold text-dark mb-12 leading-tight max-w-md">
+        ¿Qué necesitás para sumarte?
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {requisitos.map((req, i) => (
+          <div class="bg-cream p-8 rounded-sm border border-olive/10">
+            <div class="flex items-start gap-4 mb-4">
+              <span class="font-display text-4xl font-semibold text-olive/40 leading-none flex-shrink-0">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 class="font-display text-xl font-semibold text-dark leading-snug pt-1">
+                {req.titulo}
+              </h3>
+            </div>
+            <p class="text-dark-muted text-sm leading-relaxed">{req.descripcion}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Cómo unirse -->
+  <section class="max-w-5xl mx-auto px-6 py-24">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-widest text-olive mb-4">¿Cómo doy el paso?</p>
+        <h2 class="font-display text-4xl font-semibold text-dark leading-tight mb-6">
+          Escribinos y conversamos
+        </h2>
+        <div class="w-10 h-0.5 bg-olive mb-6"></div>
+        <p class="text-dark-muted leading-relaxed mb-8">
+          Si te interesa sumarte como voluntarix, escribinos por Instagram. Podemos coordinar
+          una charla para contarte más del proceso, resolver dudas, y ver en qué sede
+          y área podrías aportar.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href="https://instagram.com/sotaventopopular"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-3 bg-dark text-cream-light text-sm font-medium rounded-sm hover:bg-olive transition-colors text-center"
+          >
+            @sotaventopopular
+          </a>
+          <a
+            href="https://instagram.com/aguante.popular"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-3 border border-dark text-dark text-sm font-medium rounded-sm hover:border-olive hover:text-olive transition-colors text-center"
+          >
+            @aguante.popular
+          </a>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="absolute -top-8 -right-8 w-40 h-40 rounded-full bg-olive/10 pointer-events-none"></div>
+        <blockquote class="relative bg-dark text-cream-light p-10 rounded-sm">
+          <p class="font-display text-xl italic leading-relaxed mb-4 text-cream/80">
+            "Nosotros, los de abajo, escribiremos la historia y la memoria con tinta indeleble."
+          </p>
+          <footer class="text-olive text-sm font-medium">
+            Sotavento Popular, 2017
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+</Layout>
