@@ -56,9 +56,14 @@ const areas = [
   <!-- Header -->
   <section class="relative overflow-hidden min-h-[50vh] flex items-end">
     <div
+      id="contenido-hero-bg"
       class="absolute inset-0 bg-cover bg-center"
-      style="background-image: url('/sotaweb/images/cientificas.png');"
     ></div>
+    <script>
+      const imgs = ['/sotaweb/images/cientificas.png', '/sotaweb/images/poetas.png'];
+      const pick = imgs[Math.floor(Math.random() * imgs.length)];
+      document.getElementById('contenido-hero-bg').style.backgroundImage = `url('${pick}')`;
+    </script>
     <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/65 to-dark/20"></div>
 
     <div class="relative max-w-5xl mx-auto px-6 pb-16 pt-32 w-full">
