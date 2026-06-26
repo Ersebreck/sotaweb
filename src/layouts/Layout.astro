@@ -30,6 +30,20 @@ const {
     />
   </head>
   <body>
+    <!-- SVG filter: dilates Jacatra outline pixels inward to fill the hollow interior with olive -->
+    <svg width="0" height="0" style="position:absolute;overflow:hidden;" aria-hidden="true">
+      <defs>
+        <filter id="jacatra-fill" x="-5%" y="-5%" width="110%" height="110%">
+          <feMorphology operator="dilate" radius="5" in="SourceAlpha" result="dilated"/>
+          <feFlood flood-color="#8A8A50" result="olive"/>
+          <feComposite in="olive" in2="dilated" operator="in" result="filled"/>
+          <feMerge>
+            <feMergeNode in="filled"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+    </svg>
     <Nav />
     <main>
       <slot />

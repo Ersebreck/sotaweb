@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'TheJacatra';
+  src: url('/sotaweb/fonts/THE_JACATRA.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --color-cream: #EDE8DC;
   --color-cream-light: #F5F1E8;
@@ -10,10 +18,20 @@
 
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Inter', system-ui, sans-serif;
+  --font-jacatra: 'TheJacatra', serif;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+.label-jacatra {
+  font-family: var(--font-jacatra);
+  color: var(--color-dark);
+  -webkit-text-stroke: 1.5px var(--color-dark);
+  font-size: 2.25rem;
+  line-height: 1.2;
+  filter: url('#jacatra-fill');
 }
 
 body {
