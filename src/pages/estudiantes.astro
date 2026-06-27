@@ -6,43 +6,46 @@ const areas = [
     titulo: 'Lectura crítica',
     descripcion: 'Comprensión lectora, análisis de textos, argumentación y pensamiento crítico. Herramientas para leer el mundo.',
     icono: '📖',
-    tipo: null,
-    url: null,
+    links: [],
   },
   {
     titulo: 'Matemáticas',
     descripcion: 'Razonamiento cuantitativo, álgebra, geometría y estadística. Desde los fundamentos hasta los ejercicios de la prueba.',
     icono: '∑',
-    tipo: null,
-    url: null,
+    links: [],
   },
   {
     titulo: 'Ciencias naturales',
     descripcion: 'Biología, química y física: conceptos clave, resolución de problemas y comprensión del entorno natural.',
     icono: '⚗',
-    tipo: null,
-    url: null,
+    links: [
+      {
+        label: 'Biología — competencias',
+        url: 'https://notebooklm.google.com/notebook/c5245694-0431-4090-8488-6ca563118a8b/artifact/f2566e18-7cfb-4c69-b890-949f26ec2816?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_',
+      },
+      {
+        label: 'Biología — temas',
+        url: 'https://notebooklm.google.com/notebook/636d990b-8966-4f53-a0d9-69ad412feabf/artifact/0470f115-b3f2-4019-9b8b-7e59f6b5bba3?utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_',
+      },
+    ],
   },
   {
     titulo: 'Ciencias sociales',
     descripcion: 'Historia, geografía, economía y política. Una lectura crítica del pasado y del presente.',
     icono: '🌎',
-    tipo: null,
-    url: null,
+    links: [],
   },
   {
     titulo: 'Inglés',
     descripcion: 'Comprensión de lectura en inglés, vocabulario y estructuras gramaticales básicas para la prueba.',
     icono: 'Aa',
-    tipo: null,
-    url: null,
+    links: [],
   },
   {
     titulo: 'Competencias ciudadanas',
     descripcion: 'Convivencia, participación, pluralidad y derechos. La ciudadanía como ejercicio político cotidiano.',
     icono: '⚖',
-    tipo: null,
-    url: null,
+    links: [],
   },
 ];
 
@@ -121,8 +124,8 @@ const simulacros = [
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
       {areas.map((area) => (
         <div class={`group relative flex flex-col border rounded-sm p-7 transition-colors ${
-          area.url
-            ? 'border-olive/25 hover:border-olive bg-cream-light hover:bg-cream cursor-pointer'
+          area.links.length > 0
+            ? 'border-olive/25 hover:border-olive bg-cream-light hover:bg-cream'
             : 'border-olive/15 bg-cream-light'
         }`}>
           <div class="w-12 h-12 rounded-sm bg-olive/10 border border-olive/20 flex items-center justify-center mb-5 text-xl font-display font-semibold text-olive">
@@ -134,19 +137,21 @@ const simulacros = [
           <p class="text-sm text-dark-muted leading-relaxed flex-1">
             {area.descripcion}
           </p>
-          <div class="mt-6">
-            {area.url ? (
-              <a
-                href={area.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 text-sm font-medium text-olive hover:text-olive-dark transition-colors"
-              >
-                {area.tipo === 'notebooklm' ? 'Abrir en NotebookLM' : 'Ver material'}
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
+          <div class="mt-6 flex flex-col gap-2">
+            {area.links.length > 0 ? (
+              area.links.map((link) => (
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 text-sm font-medium text-olive hover:text-olive-dark transition-colors"
+                >
+                  <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  {link.label}
+                </a>
+              ))
             ) : (
               <span class="inline-flex items-center gap-2 text-xs font-medium text-dark-muted/60 border border-dashed border-dark/15 rounded-sm px-3 py-1.5">
                 <span class="w-1.5 h-1.5 rounded-full bg-olive/40 inline-block"></span>
@@ -221,7 +226,7 @@ const simulacros = [
         </p>
         <div class="flex flex-col sm:flex-row gap-4">
           <a
-            href="https://instagram.com/sotaventopopular"
+            href="https://www.instagram.com/sotaventoficial/"
             target="_blank"
             rel="noopener noreferrer"
             class="px-6 py-3 bg-dark text-cream-light text-sm font-medium rounded-sm hover:bg-olive transition-colors text-center"
