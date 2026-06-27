@@ -126,6 +126,39 @@ const simulacros = [
       Seis áreas, un mismo proceso
     </h2>
 
+    <!-- Cartilla -->
+    <div class="flex items-center justify-between gap-6 border border-olive/30 bg-cream-light rounded-sm px-7 py-5 mb-10">
+      <div>
+        <p class="text-xs font-medium text-olive uppercase tracking-wider mb-1">Recurso general</p>
+        <h3 class="font-display text-lg font-semibold text-dark leading-snug">Cartilla 2025 — Pre-ICFES Sotavento</h3>
+        <p class="text-sm text-dark-muted mt-1">Material completo del proceso. Puedes verla en el navegador o descargarla.</p>
+      </div>
+      <div class="flex gap-3 flex-shrink-0">
+        <a
+          href="/sotaweb/docs/cartilla-2025.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-olive text-cream-light text-sm font-medium rounded-sm hover:bg-olive-dark transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+          </svg>
+          Ver
+        </a>
+        <a
+          href="/sotaweb/docs/cartilla-2025.pdf"
+          download
+          class="inline-flex items-center gap-2 px-4 py-2 border border-olive text-olive text-sm font-medium rounded-sm hover:bg-olive hover:text-cream-light transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          Descargar
+        </a>
+      </div>
+    </div>
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
       {areas.map((area) => (
         <div class={`group relative flex flex-col border rounded-sm p-7 transition-colors ${
