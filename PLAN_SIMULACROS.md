@@ -1,6 +1,6 @@
 # Plan — Simulacro real (a partir de los insumos en `Insumos/`)
 
-> Estado: **aprobado (confirmación aceptada sin respuestas textuales a las 3 preguntas de la sección 6)**. Fase B arrancó con decisiones documentadas por defecto — ver sección 6 actualizada. `simulacro.astro` ya consume `src/data/preguntas-ciencias.json` en vez del array hardcodeado; el banco tiene 3 de ~49 preguntas de Ciencias Naturales. El resto de la extracción y el pipeline de imágenes quedaron en issues hijas de BIO-9.
+> Estado: **aprobado (confirmación aceptada sin respuestas textuales a las 3 preguntas de la sección 6)**. Fase B arrancó con decisiones documentadas por defecto — ver sección 6 actualizada. `simulacro.astro` ya consume `src/data/preguntas-ciencias.json` en vez del array hardcodeado; el banco tiene **45 de las 49 preguntas** de Ciencias Naturales (Física/Biología/Química) de la Cartilla 2025, curadas y etiquetadas con `componente` y `competencia` (ver BIO-10). Quedan 4 preguntas pendientes (68, 70, 71, 73) delegadas al pipeline de imágenes (BIO-11) — ver §3.1 actualizado.
 
 ## 1. Qué hay realmente en `Insumos/` (auditoría de las fuentes)
 
@@ -34,6 +34,14 @@ Cada PDF trae figuras incrustadas (gráficos, árboles genealógicos, diagramas 
 2. Parseo por reglas simples: los documentos usan headers consistentes (`Componente del saber: X`, `Competencia N: Y`, `RESPONDA LAS PREGUNTAS N A M DE ACUERDO CON...`, numeración `N.` seguida de 4 opciones `A./B./C./D.`) → separar en preguntas individuales con regex/heurísticas, no con un LLM (más barato, más confiable, reproducible).
 3. `pdfimages -png` por página para extraer las figuras que acompañan a cada pregunta; asociarlas a la pregunta correspondiente por número de página (esto sí requiere revisión humana rápida, 1 pasada, porque la asociación imagen↔pregunta no es 100% automática).
 4. Guardar todo en `Insumos/` (no versionado) como intermedio, y el resultado final curado en un archivo de datos versionado en `src/` (ver §4).
+
+**Actualización (BIO-10):** `pdftotext -layout` confirmó el problema de columnas intercaladas anticipado en el issue (ej. preguntas 71/72 mezclan sus opciones entre columnas). En vez de parsear el `.txt` con regex, se resolvió renderizando cada página a imagen (`pdftoppm -png -r 150`) y leyéndola directamente — esto además permitió leer gráficas, tablas, circuitos y diagramas que el texto plano no captura, y resolver correctamente casos donde el texto de una pregunta queda mezclado con el de la vecina (confirmado en 71/72: la Q72 sobre resonancia de la guitarra tiene su enunciado en la columna izquierda pero sus 4 opciones aparecen en la columna derecha, alineadas con la Q71). De las 46 preguntas restantes (58-106, salvo 94/95/105 ya migradas), se curaron **42** con confianza alta (respuesta verificada por texto y/o por lectura directa de la figura); **4 quedaron pendientes** por depender de comparar 4 diagramas gráficos casi idénticos donde un error de lectura es fácil y costoso de cometer:
+- **68** (identificar cuál de 4 diagramas de flujo de calor representa correctamente una máquina térmica — las 4 variantes solo se diferencian por la dirección de flechas Qc/Qf/Energía, muy sensible a mala lectura).
+- **70** (identificar cuál de 4 diagramas de vectores de fuerza eléctrica es el correcto, dado un triángulo de 3 cargas).
+- **71** (identificar cuál de 4 gráficas de onda representa la longitud de onda de la luz en vidrio/agua/aire).
+- **73** (asociar una gráfica de energía potencial con uno de 4 modelos de montaña rusa dibujados a mano, muy pequeños).
+
+Estas 4 quedan documentadas aquí y delegadas a BIO-11 (pipeline de mejora de imágenes), que ya existe como issue hija: al mejorar la resolución de estas figuras se vuelve mucho más seguro verificarlas (o delegarlas a revisión humana con la imagen en buena calidad). Para las preguntas que sí se incluyeron y que originalmente tenían tablas de datos, gráficas o diagramas (ej. 58, 60-66, 78-93, 98-104, 106), la figura se convirtió en una **descripción textual dentro del enunciado o del contexto** (equivalente a un texto alternativo accesible) en vez de depender de una imagen — esto las deja utilizables de inmediato; BIO-11 puede añadir después la imagen real como refuerzo visual sin cambiar la pregunta.
 
 ### 3.2 Mejora de imágenes de baja resolución
 - Filtrar automáticamente las imágenes extraídas con lado mayor < ~500px (umbral a validar).
@@ -75,7 +83,7 @@ Esto habilita, sin backend (sigue siendo estático + localStorage como ya está 
 ### 5. Fases de implementación
 
 1. **Fase A (este documento):** plan + auditoría de fuentes. ✅ hecho.
-2. **Fase B — Ciencias Naturales primero** (foco del issue): extraer y curar el banco de Física/Biología/Química de la Cartilla, definir taxonomía de competencias (⚠️ bloqueado por tu confirmación), mejorar imágenes de baja resolución, migrar `simulacro.astro` de array hardcodeado a `src/data/preguntas-ciencias.json` + selector de N preguntas aleatorias con tracking por competencia en resultados.
+2. **Fase B — Ciencias Naturales primero** (foco del issue): extraer y curar el banco de Física/Biología/Química de la Cartilla ✅ **45 de 49 preguntas curadas (BIO-10)**, definir taxonomía de competencias ✅ hecho, mejorar imágenes de baja resolución (pendiente, BIO-11), migrar `simulacro.astro` de array hardcodeado a `src/data/preguntas-ciencias.json` ✅ hecho + selector de N preguntas aleatorias con tracking por competencia en resultados ✅ hecho.
 3. **Fase C — Resto de áreas:** repetir el pipeline con Sesión 1 (Lectura Crítica, Matemáticas) y Sesión 2 (Inglés, Sociales), que ya vienen con competencias explícitas en el PDF así que el etiquetado es mecánico, no manual.
 4. **Fase D:** selector de área/materia en pantalla de inicio (ya en roadmap Fase 2 de `DESARROLLO.md`).
 

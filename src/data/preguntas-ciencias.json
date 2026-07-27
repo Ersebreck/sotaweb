@@ -1,6 +1,592 @@
 {
-  "_readme": "Banco de preguntas de Ciencias Naturales extraído de Insumos/Cartilla 2025 Pre-Icfes Sotavento.pdf. Ver PLAN_SIMULACROS.md para metodología de extracción y src/data/competencias.json para la taxonomía de competencia usada. Este es un subconjunto inicial (3 de ~49 preguntas de Física/Biología/Química de la Cartilla) — el resto queda para el issue de curación de contenido derivado de BIO-9.",
+  "_readme": "Banco de preguntas de Ciencias Naturales extraido de Insumos/Cartilla 2025 Pre-Icfes Sotavento.pdf. Ver PLAN_SIMULACROS.md para metodologia de extraccion y src/data/competencias.json para la taxonomia de competencia usada. 45 de las 49 preguntas de Fisica/Biologia/Quimica de la Cartilla (preguntas 58-106) estan curadas aqui. Las 4 preguntas restantes (68, 70, 71, 73) dependen de figuras que solo se pueden responder comparando 4 diagramas graficos casi identicos (maquina termica, vectores de fuerza electrica, graficas de onda, modelos de montana rusa); se dejaron pendientes porque requieren la figura en buena resolucion + revision humana (ver BIO-11, pipeline de mejora de imagenes) en vez de una respuesta inferida con bajo margen de error. Para las preguntas que originalmente traian tablas, graficas o diagramas, el contenido de la figura se convirtio en una descripcion textual dentro del enunciado (o del campo contexto), de modo que la pregunta sea autocontenida y no dependa de una imagen para poder resolverse; BIO-11 puede anadir mas adelante la imagen real extraida/mejorada como complemento visual.",
   "preguntas": [
+    {
+      "id": "cn-058",
+      "materia": "ciencias-naturales",
+      "componente": "fisica",
+      "competencia": "explicacion-de-fenomenos",
+      "fuente": "cartilla-2025",
+      "numero": 58,
+      "contexto": null,
+      "enunciado": "Jorge está interesado en realizar un experimento en torno a la transferencia de calor. En una habitación bien cerrada y aislada térmicamente que presenta una temperatura ambiente de 9 grados Celsius, Jorge coloca un calentador que se mantiene a 30 grados Celsius, y toma los datos de temperatura y tiempo hasta alcanzar el equilibrio de temperaturas. De acuerdo con la información anterior, ¿cuál de las siguientes gráficas muestra (cualitativa y aproximadamente) la variación de la temperatura ambiente de la habitación con relación al tiempo?",
+      "opciones": [
+        "Una gráfica en la que la temperatura parte de 27°C y desciende hasta estabilizarse cerca de 3°C.",
+        "Una gráfica en la que la temperatura permanece constante en 9°C durante todo el tiempo.",
+        "Una gráfica en la que la temperatura parte de 9°C, sube rápidamente al inicio y luego se estabiliza (se aplana) cerca de 27°C.",
+        "Una gráfica en la que la temperatura aumenta de forma recta (lineal) y sin detenerse desde 3°C hasta 27°C."
+      ],
+      "correcta": 2,
+      "explicacion": "En un sistema aislado que tiende al equilibrio térmico, la temperatura del ambiente se aproxima de forma asintótica a la temperatura final: sube rápido al principio (mayor diferencia de temperatura con el calentador) y cada vez más lento a medida que se acerca al equilibrio, hasta aplanarse. Por eso la gráfica correcta es la que parte de 9°C y se estabiliza cerca de 27-30°C (opción C), no la que sube en línea recta (D, ignora que la razón de cambio disminuye con el tiempo) ni las que decrecen o permanecen constantes (A y B, contradicen que el calentador está más caliente que el ambiente)."
+    },
+    {
+      "id": "cn-059",
+      "materia": "ciencias-naturales",
+      "componente": "fisica",
+      "competencia": "explicacion-de-fenomenos",
+      "fuente": "cartilla-2025",
+      "numero": 59,
+      "contexto": null,
+      "enunciado": "Un cuerpo de velocidad V1 colisiona con un cuerpo quieto de igual masa. Los dos cuerpos se mueven de forma rectilínea uniforme, como se muestra en la figura: antes del choque, el cuerpo 1 se mueve con velocidad V1 hacia el cuerpo 2 que está en reposo; después del choque, cada cuerpo sale despedido en línea recta con velocidad constante (v y v'), en direcciones distintas. Teniendo en cuenta que en el proceso se conserva el momento lineal del sistema, ¿por qué después del choque los cuerpos se mueven de forma rectilínea uniforme?",
+      "opciones": [
+        "Porque el movimiento era rectilíneo acelerado antes del choque.",
+        "Porque no hay fuerzas externas después del choque.",
+        "Porque sólo hay fuerza de atracción después del choque.",
+        "Porque el movimiento era curvilíneo acelerado antes del choque."
+      ],
+      "correcta": 1,
+      "explicacion": "Durante la colisión actúan fuerzas internas entre los dos cuerpos que cambian sus velocidades (por eso se conserva el momento lineal del sistema). Una vez separados, al no actuar ninguna fuerza externa sobre ellos, la primera ley de Newton garantiza que cada cuerpo mantenga su velocidad constante en línea recta. Las opciones A y D describen el movimiento antes del choque (que no es el que se pregunta) y la C inventa una fuerza de atracción que no existe en el enunciado."
+    },
+    {
+      "id": "cn-060",
+      "materia": "ciencias-naturales",
+      "componente": "fisica",
+      "competencia": "uso-comprensivo",
+      "fuente": "cartilla-2025",
+      "numero": 60,
+      "contexto": null,
+      "enunciado": "La figura representa un circuito eléctrico con una batería y 3 bombillos, cada uno conectado en su propia rama independiente que vuelve a unirse a los cables principales de la batería (los tres bombillos están prendidos). Accidentalmente, se corta el cable que une el bombillo 1 al circuito. ¿Qué sucede con los bombillos 2 y 3, luego de cortarse el cable?",
+      "opciones": [
+        "Se apagan, ya que en un circuito eléctrico en paralelo los bombillos están conectados uno a continuación del otro.",
+        "Continúan prendidos, ya que en un circuito eléctrico en serie cada uno de los bombillos tiene su propio circuito.",
+        "Se apagan, ya que en un circuito eléctrico en serie los bombillos están conectados uno a continuación del otro.",
+        "Continúan prendidos, ya que en un circuito eléctrico en paralelo cada uno de los bombillos se conecta con la batería."
+      ],
+      "correcta": 3,
+      "explicacion": "En el circuito de la figura cada bombillo forma su propia rama (lazo) que conecta directamente con los dos cables de la batería: es un circuito en paralelo. Si se corta el cable del bombillo 1, solo esa rama deja de tener corriente; las ramas de los bombillos 2 y 3 siguen cerradas y conectadas a la batería, así que continúan encendidos. Las opciones A y C describen mal el circuito (lo llaman serie o dicen que los bombillos están uno a continuación del otro, que es la descripción de un circuito en serie, no del que se muestra); la B confunde serie con paralelo."
+    },
+    {
+      "id": "cn-061",
+      "materia": "ciencias-naturales",
+      "componente": "fisica",
+      "competencia": "explicacion-de-fenomenos",
+      "fuente": "cartilla-2025",
+      "numero": 61,
+      "contexto": null,
+      "enunciado": "Un estudiante quiere medir la corriente que pasa por un bombillo en un circuito y, para ello, usa un amperímetro que tiene una resistencia interna muy pequeña. En la figura, el amperímetro queda conectado en paralelo con el bombillo (en vez de en serie), formando una rama alterna de baja resistencia junto al bombillo, ambos conectados a una pila y una resistencia. El estudiante sabe que la corriente fluye por el camino donde hay menos resistencia. Él observa que al conectar el amperímetro al circuito, el bombillo ya no enciende. De acuerdo con lo anterior, ¿por qué no enciende el bombillo?",
+      "opciones": [
+        "Porque el amperímetro hace pasar más corriente por el bombillo hasta fundirlo.",
+        "Porque la resistencia está ubicada después del bombillo.",
+        "Porque la mayor parte de la corriente pasa por el amperímetro.",
+        "Porque la pila impide el paso de corriente hacia el bombillo."
+      ],
+      "correcta": 2,
+      "explicacion": "Un amperímetro debe conectarse en serie para medir la corriente que pasa por un elemento; aquí quedó conectado en paralelo con el bombillo. Como su resistencia interna es mucho menor que la del bombillo, y la corriente sigue el camino de menor resistencia, casi toda la corriente se desvía por el amperímetro en vez de pasar por el bombillo, que por eso no enciende (queda como \"puenteado\" o en cortocircuito). Las otras opciones no son consistentes con el circuito descrito."
+    },
+    {
+      "id": "cn-062",
+      "materia": "ciencias-naturales",
+      "componente": "fisica",
+      "competencia": "uso-comprensivo",
+      "fuente": "cartilla-2025",
+      "numero": 62,
+      "contexto": null,
+      "enunciado": "Una estudiante observa la construcción de un edificio nuevo para el colegio y mira a un obrero que lanza, cada vez, un ladrillo desde el primer piso, mientras que otro lo recibe justo a 3,0 m de altura, como se muestra en la figura (una escalera marcada con alturas de 1,0 m, 1,5 m, 2,0 m, 2,5 m y 3,0 m; el ladrillo I está en la parte alta, a 3,0 m, y el ladrillo II lo sostiene el otro obrero a 1,0 m). Si la estudiante sabe que la energía potencial depende de la altura y de la masa del objeto (los ladrillos son iguales) y de repente observa que mientras el obrero se mantiene sosteniendo el ladrillo II a una altura de 1,0 m respecto al piso, el otro obrero deja caer el ladrillo I, ¿qué altura tiene que descender el ladrillo I para que ambos ladrillos tengan la misma energía potencial?",
+      "opciones": [
+        "2,0 m.",
+        "1,5 m.",
+        "1,0 m.",
+        "3,0 m"
+      ],
+      "correcta": 0,
+      "explicacion": "Como los dos ladrillos tienen la misma masa, tienen la misma energía potencial cuando están a la misma altura. El ladrillo I parte de 3,0 m y el ladrillo II está fijo en 1,0 m, así que el ladrillo I debe descender 3,0 m − 1,0 m = 2,0 m para igualar la altura (y por tanto la energía potencial) del ladrillo II."
+    },
+    {
+      "id": "cn-063",
+      "materia": "ciencias-naturales",
+      "componente": "fisica",
+      "competencia": "uso-comprensivo",
+      "fuente": "cartilla-2025",
+      "numero": 63,
+      "contexto": null,
+      "enunciado": "Un lazo (cuerda) de longitud L y masa por unidad de longitud igual a μ se tensiona con bloques de masa m cada uno, como se muestra en cuatro situaciones. La masa del lazo es mucho menor que la masa de cada bloque. Situación (1): la cuerda cuelga de un techo fijo y sostiene un bloque en su extremo inferior (una sola polea, ninguna en realidad — solo un punto fijo). Situación (2): la cuerda va del techo a una pared, pasando por una polea fija sujeta al techo, con un bloque colgando del extremo que baja de la polea. Situación (3): la cuerda pasa por dos poleas, una de ellas móvil de la cual cuelga un bloque, y termina sosteniendo otro bloque en el extremo libre. Situación (4): la cuerda pasa por una única polea fija sujeta arriba, con un bloque colgando de cada extremo. Las situaciones en las cuales el lazo está sujeto a iguales tensiones son:",
+      "opciones": [
+        "solamente 1 y 2.",
+        "solamente 2 y 4.",
+        "solamente 1, 2 y 4.",
+        "1, 2, 3 y 4."
+      ],
+      "correcta": 2,
+      "explicacion": "Cuando una cuerda ideal (sin masa) pasa solo por poleas fijas y sin fricción, la tensión es la misma en toda su longitud e igual al peso que sostiene en su(s) extremo(s) libre(s): esto ocurre en las situaciones 1, 2 y 4, donde solo hay puntos de sujeción y poleas fijas. En la situación 3 hay una polea móvil, que reparte el peso que sostiene entre dos tramos de cuerda, rompiendo la igualdad simple entre la tensión y el peso de un solo bloque. Por eso la tensión es igual solamente en 1, 2 y 4 (opción C)."
+    },
+    {
+      "id": "cn-064",
+      "materia": "ciencias-naturales",
+      "componente": "fisica",
+      "competencia": "explicacion-de-fenomenos",
+      "fuente": "cartilla-2025",
+      "numero": 64,
+      "contexto": null,
+      "enunciado": "El dispositivo indicado en la figura consta de una caja dividida en dos partes por un émbolo sin fricción. En el compartimiento de la izquierda hay n moles de gas ideal y un resorte de constante K y longitud natural l que sujeta el émbolo, permaneciendo elongado (estirado) en equilibrio; el compartimiento de la derecha está inicialmente vacío. Si en el compartimiento vacío de la situación anterior se introducen n moles de gas ideal (a temperatura T0), sucederá que el émbolo",
+      "opciones": [
+        "permanece en donde estaba, pues las presiones de los gases son iguales en los dos compartimientos.",
+        "se corre hacia la izquierda puesto que el nuevo gas ejerce fuerza sobre el émbolo.",
+        "se corre hacia la derecha dado que el resorte debe comprimir el nuevo gas.",
+        "puede moverse a un lado u otro dependiendo de la presión del vacío en la situación inicial."
+      ],
+      "correcta": 1,
+      "explicacion": "Antes de introducir el nuevo gas, el vacío del compartimiento derecho no ejercía ninguna fuerza sobre el émbolo, así que el equilibrio se debía solo a la presión del gas de la izquierda contra el resorte estirado. Al introducir n moles de gas ideal en el compartimiento derecho, este nuevo gas empieza a ejercer una presión que empuja el émbolo hacia la izquierda, rompiendo el equilibrio anterior y desplazándolo en esa dirección. La opción A ignora que antes había vacío (presión cero) a la derecha, y la C invierte el sentido de la fuerza que ejerce el nuevo gas."
+    },
+    {
+      "id": "cn-065",
+      "materia": "ciencias-naturales",
+      "componente": "fisica",
+      "competencia": "uso-comprensivo",
+      "fuente": "cartilla-2025",
+      "numero": 65,
+      "contexto": null,
+      "enunciado": "La gráfica aceleración contra velocidad para el movimiento rectilíneo de un carro que parte del reposo es la siguiente: desde v=0 hasta v=v0, la aceleración se mantiene constante en un valor de 2a; luego, desde v=v0 hasta v=2v0, la aceleración salta a un valor constante de 3a. t1 es el tiempo que tarda el carro desde arrancar hasta llegar a una velocidad v0, y t2 es el tiempo que tarda en pasar de v0 a 2v0. Puede concluirse que:",
+      "opciones": [
+        "t1=t2",
+        "t1=2t2",
+        "t1=2t2/3",
+        "t1=3t2/2"
+      ],
+      "correcta": 3,
+      "explicacion": "En cada tramo, a = Δv/Δt, así que Δt = Δv/a. Para el primer tramo: t1 = (v0 − 0)/(2a) = v0/(2a). Para el segundo tramo: t2 = (2v0 − v0)/(3a) = v0/(3a). Dividiendo, t1/t2 = (v0/2a)/(v0/3a) = 3/2, es decir, t1 = (3/2)t2 = 3t2/2, que corresponde a la opción D."
+    },
+    {
+      "id": "cn-066",
+      "materia": "ciencias-naturales",
+      "componente": "fisica",
+      "competencia": "indagacion",
+      "fuente": "cartilla-2025",
+      "numero": 66,
+      "contexto": null,
+      "enunciado": "Se mide el tiempo de vaciado del agua de un tanque a través de una llave conectada al fondo del mismo, para tres llaves de diferente diámetro y tres alturas de llenado del tanque. Los resultados fueron: con llave de 1,0 cm de diámetro, el tanque se vacía en 70,0 s (altura 30,0 cm), 60,0 s (20,0 cm) y 50,0 s (10,0 cm); con llave de 2,0 cm de diámetro, en 40,0 s (30,0 cm), 35,0 s (20,0 cm) y 30,0 s (10,0 cm); y con llave de 3,0 cm de diámetro, en 10,0 s para las tres alturas (30,0 cm, 20,0 cm y 10,0 cm). Con base en los datos registrados en la tabla, se puede afirmar que el tiempo de vaciado",
+      "opciones": [
+        "disminuye más cuando el diámetro de la llave aumenta 1 cm que cuando se reduce la altura del nivel de agua 10 cm.",
+        "disminuye más cuando el diámetro de la llave se reduce 1 cm que cuando se reduce la altura del nivel de agua 10 cm.",
+        "aumenta más cuando el diámetro de la llave aumenta 1 cm que cuando se reduce la altura del nivel de agua en 10 cm.",
+        "aumenta más cuando el diámetro de la llave aumenta 1 cm que cuando se aumenta la altura del nivel de agua en 10 cm."
+      ],
+      "correcta": 0,
+      "explicacion": "Comparando filas: al pasar de 1,0 cm a 2,0 cm de diámetro (manteniendo la altura en 30,0 cm), el tiempo baja de 70,0 s a 40,0 s (una reducción de 30 s). En cambio, al reducir la altura de 30,0 cm a 20,0 cm (manteniendo el diámetro en 1,0 cm), el tiempo solo baja de 70,0 s a 60,0 s (una reducción de 10 s). El mismo patrón se repite en las demás filas: el diámetro de la llave tiene un efecto mucho mayor sobre el tiempo de vaciado que la altura del agua. Por eso la opción correcta es la A."
+    },
+    {
+      "id": "cn-067",
+      "materia": "ciencias-naturales",
+      "componente": "fisica",
+      "competencia": "explicacion-de-fenomenos",
+      "fuente": "cartilla-2025",
+      "numero": 67,
+      "contexto": null,
+      "enunciado": "La siguiente imagen representa un sistema conformado por un plano inclinado a cierto ángulo θ y dos masas m1 y m2: m1 está sobre el plano inclinado y m2 cuelga verticalmente, unidas por una cuerda que pasa por una polea en la parte superior del plano. El plano inclinado y la polea no presentan fricción, e inicialmente el sistema se encuentra en equilibrio y las masas no se mueven. ¿Cómo se afecta el estado de movimiento del sistema si se aumenta el ángulo θ?",
+      "opciones": [
+        "El sistema permanece en reposo, ya que no hay fricción y las masas m1 y m2 siguen siendo las mismas.",
+        "Las masas se mueven aceleradamente, m1 se desliza por el plano hacia abajo y m2 se mueve hacia arriba.",
+        "Al cambiar el ángulo θ se afecta el movimiento, haciendo disminuir su rapidez, ya que la fuerza neta es cero.",
+        "Las masas m1 y m2 adquieren velocidad constante, m2 se desliza hacia abajo y m1 se mueve hacia arriba."
+      ],
+      "correcta": 1,
+      "explicacion": "En el equilibrio inicial, la componente del peso de m1 a lo largo del plano (m1·g·senθ) equilibra exactamente el peso de m2 que cuelga. Al aumentar θ, esa componente del peso de m1 a lo largo del plano aumenta (sen θ crece), por lo que deja de estar equilibrada por m2: aparece una fuerza neta que hace que m1 se deslice hacia abajo por el plano y m2 suba, ambas acelerando (no a velocidad constante, porque la fuerza neta ya no es cero)."
+    },
+    {
+      "id": "cn-069",
+      "materia": "ciencias-naturales",
+      "componente": "fisica",
+      "competencia": "indagacion",
+      "fuente": "cartilla-2025",
+      "numero": 69,
+      "contexto": null,
+      "enunciado": "Considere una planta nuclear que produce energía al calentar agua pesada, que circula alrededor del material nuclear a una temperatura de 350°C, hasta evaporarla; el vapor pasa por una turbina que genera energía eléctrica y luego se enfría en un intercambiador de calor usando agua de un afluente externo que entra a 18°C. En una inspección al intercambiador de calor, se detecta una elevación en la temperatura del agua que sale al afluente. Los técnicos sospechan que se debe a que la materia nuclear le entrega más calor del esperado al agua pesada. La manera de comprobar directamente que esta hipótesis es cierta, es medir la temperatura",
+      "opciones": [
+        "del agua pesada líquida antes de ingresar al reactor.",
+        "en el agua del afluente que entra en el intercambiador de calor.",
+        "del vapor de agua después de pasar por la turbina.",
+        "del vapor de agua pesada antes de llegar a la turbina."
+      ],
+      "correcta": 3,
+      "explicacion": "Para confirmar directamente que el material nuclear está transfiriendo más calor del esperado al agua pesada, hay que medir la temperatura del vapor justo después de recibir ese calor y antes de que intervengan otros procesos (como la turbina o el intercambiador), es decir, el vapor de agua pesada antes de llegar a la turbina. Si esa temperatura es mayor a la esperada (350°C), confirma la hipótesis. Medir en el afluente (opción B) o después de la turbina (C) solo refleja el síntoma final, ya afectado por otros procesos intermedios, y medir antes de ingresar al reactor (A) no dice nada sobre el calor que el material nuclear efectivamente entrega."
+    },
+    {
+      "id": "cn-072",
+      "materia": "ciencias-naturales",
+      "componente": "fisica",
+      "competencia": "explicacion-de-fenomenos",
+      "fuente": "cartilla-2025",
+      "numero": 72,
+      "contexto": null,
+      "enunciado": "La caja de la guitarra tiene una forma que favorece la resonancia del aire con la onda sonora producida por la cuerda de la guitarra. Supongamos que la guitarra tuviera una caja cuadrada en lugar de la caja actual. Es correcto afirmar que, en relación a una guitarra normal:",
+      "opciones": [
+        "la amplitud del movimiento de las partículas del aire es menor, cambiando la intensidad del sonido producido.",
+        "la longitud de onda del sonido disminuye modificando el tono del sonido escuchado.",
+        "la velocidad de propagación de la onda aumenta variando la intensidad del sonido percibido.",
+        "la frecuencia de la onda disminuye aumentando el tono del sonido percibido."
+      ],
+      "correcta": 0,
+      "explicacion": "La forma de la caja de la guitarra afecta cómo resuena el aire dentro de ella, lo que cambia la amplitud con la que vibran las partículas de aire y, con ello, la intensidad (volumen) del sonido producido — pero no cambia el tono (frecuencia) de la nota, que depende de la cuerda (su longitud, tensión y masa), ni la velocidad de propagación del sonido, que depende del medio (el aire), no de la forma de la caja. Por eso las opciones B, C y D son incorrectas: atribuyen a la forma de la caja cambios en el tono o en la velocidad del sonido que en realidad no dependen de ella."
+    },
+    {
+      "id": "cn-074",
+      "materia": "ciencias-naturales",
+      "componente": "fisica",
+      "competencia": "explicacion-de-fenomenos",
+      "fuente": "cartilla-2025",
+      "numero": 74,
+      "contexto": null,
+      "enunciado": "En un metal que pierde electrones, la cantidad de protones es mayor que la de electrones y, por tanto, la carga total es positiva y se representa con signos +. Se tienen dos esferas metálicas idénticas: una esfera (1) inicialmente con carga +Q y otra esfera (2) inicialmente neutra. Al ponerlas en contacto y luego separarlas, se observa que las dos esferas quedan con cargas iguales +Q/2. Con base en la información anterior, ¿qué sucedió al poner las esferas en contacto?",
+      "opciones": [
+        "De la esfera 2 pasaron electrones hacia la esfera 1.",
+        "De la esfera 2 pasaron protones hacia la esfera 1.",
+        "De la esfera 1 pasaron electrones hacia la esfera 2.",
+        "De la esfera 1 pasaron protones hacia la esfera 2."
+      ],
+      "correcta": 0,
+      "explicacion": "La carga positiva de un metal corresponde a un déficit de electrones, no a un exceso de protones (los protones no se mueven en un conductor metálico). Como la esfera 1 tenía déficit de electrones (+Q) y la esfera 2 era neutra, al ponerlas en contacto algunos electrones de la esfera 2 (que sí tenía su cantidad normal) se movieron hacia la esfera 1 para igualar la carga, dejando a ambas con +Q/2. Las opciones que involucran movimiento de protones (B y D) son físicamente incorrectas en un conductor metálico. Nota: la opción D en el documento fuente contiene un error de imprenta (texto duplicado de otra pregunta) y no corresponde a una alternativa coherente sobre esferas cargadas; se conserva el resto de opciones fiel a la Cartilla."
+    },
+    {
+      "id": "cn-075",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "uso-comprensivo",
+      "fuente": "cartilla-2025",
+      "numero": 75,
+      "contexto": null,
+      "enunciado": "Los páramos son ecosistemas que presentan bajas temperaturas. Se caracterizan por el almacenamiento de agua, debido entre otros factores, a la enorme acumulación de materia orgánica en sus suelos y la morfología de muchas de las especies de plantas como los frailejones. Un factor biótico que podemos encontrar en la anterior información es",
+      "opciones": [
+        "el frailejón",
+        "el agua almacenada.",
+        "el suelo.",
+        "la temperatura"
+      ],
+      "correcta": 0,
+      "explicacion": "Un factor biótico es un componente vivo del ecosistema. De las opciones, solo el frailejón (una planta) es un ser vivo; el agua almacenada, el suelo y la temperatura son factores abióticos (no vivos) del ecosistema."
+    },
+    {
+      "id": "cn-076",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "uso-comprensivo",
+      "fuente": "cartilla-2025",
+      "numero": 76,
+      "contexto": null,
+      "enunciado": "A diferencia de otros cangrejos, el ermitaño carece de una coraza externa que lo proteja de los peligros; su exoesqueleto es muy blando. Para proteger su abdomen desnudo, este crustáceo ha ideado una estrategia insólita: tras nacer, busca la concha de un caracol muerto y enrolla su abdomen dentro de la concha. El cangrejo se beneficia del caracol sin hacerle daño, ni beneficiarlo. Por lo tanto, tienen una relación de",
+      "opciones": [
+        "mutualismo",
+        "depredación",
+        "parasitismo",
+        "comensalismo"
+      ],
+      "correcta": 3,
+      "explicacion": "El comensalismo es una relación en la que una especie se beneficia (el cangrejo ermitaño, que obtiene protección) y la otra no se ve afectada ni beneficiada ni perjudicada (el caracol, que ya está muerto y solo aporta su concha vacía). No es mutualismo (ambos se beneficiarían), ni depredación o parasitismo (implicarían daño a la otra especie)."
+    },
+    {
+      "id": "cn-077",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "explicacion-de-fenomenos",
+      "fuente": "cartilla-2025",
+      "numero": 77,
+      "contexto": null,
+      "enunciado": "Los elefantes marinos del norte tienen poca variabilidad genética, probablemente, por un cuello de botella por el que les hicieron pasar los hombres en la década de 1890. La caza hizo disminuir el censo poblacional hasta tan solo 20 individuos a finales del siglo XIX. Desde entonces, su población ha aumentado hasta más de 30.000, pero sus genes todavía llevan las señales de ese cuello de botella; su variabilidad genética es mucho menor que la de una población de elefantes marinos del sur que no sufrió una caza tan intensa. La población de elefantes marinos del sur, comparada con la del norte, se caracteriza por poseer",
+      "opciones": [
+        "mayor variabilidad genética porque la presión de caza fue menor.",
+        "mayor variabilidad genética porque la presión de caza fue mayor.",
+        "menor variabilidad genética porque la presión de caza fue mayor.",
+        "menor variabilidad genética porque la presión de caza fue menor."
+      ],
+      "correcta": 0,
+      "explicacion": "Un cuello de botella poblacional (una drástica reducción del número de individuos, como la sufrida por los elefantes marinos del norte) reduce la variabilidad genética porque solo sobrevive una fracción del acervo genético original. Como los elefantes marinos del sur no sufrieron una caza tan intensa (menor presión de caza), no atravesaron un cuello de botella tan severo y por eso conservan mayor variabilidad genética que la población del norte."
+    },
+    {
+      "id": "cn-078",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "uso-comprensivo",
+      "fuente": "cartilla-2025",
+      "numero": 78,
+      "contexto": null,
+      "enunciado": "El siguiente esquema muestra la estructura de dos tipos de célula: la célula eucariota (con núcleo, nucléolo y mitocondrias, entre otras estructuras) y la célula procariota (con nucleoide, cápsula, flagelo, membrana plasmática, pared celular y ribosomas, pero sin núcleo ni mitocondrias). La célula eucariota, a diferencia de la procariota, presenta:",
+      "opciones": [
+        "ribosomas",
+        "mitocondrias",
+        "un flagelo",
+        "una membrana plasmática"
+      ],
+      "correcta": 1,
+      "explicacion": "Según el esquema, tanto la célula eucariota como la procariota tienen ribosomas y membrana plasmática, y la procariota además puede tener flagelo — ninguna de esas tres es exclusiva de la eucariota. Las mitocondrias, en cambio, son organelos membranosos presentes únicamente en la célula eucariota, ausentes en la procariota, lo que las convierte en la diferencia correcta."
+    },
+    {
+      "id": "cn-079",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "indagacion",
+      "fuente": "cartilla-2025",
+      "numero": 79,
+      "contexto": {
+        "id": "ctx-079-080",
+        "texto": "Gráfica \"Comportamiento de las hormonas a través del ciclo menstrual\": muestra las curvas de LH, FSH, Progesterona y Estrógeno a lo largo de los días del ciclo (5, 10, 14, 22, 25), comparando un panel \"Sin anticonceptivos\" (con un pico marcado de LH/FSH alrededor del día 14 y una curva de progesterona que sube y baja en dos fases) contra un panel \"Con anticonceptivos\" (con LH y FSH aplanadas/suprimidas y progesterona sintética sostenida en un nivel alto y estable).",
+        "imagen": null,
+        "imagenAlt": null
+      },
+      "enunciado": "Las siguientes gráficas muestran los resultados de un estudio realizado a un grupo de mujeres en edad reproductiva sobre el comportamiento de las hormonas (LH, FSH, progesterona y estrógeno) a través del ciclo menstrual, comparando mujeres sin anticonceptivos y con anticonceptivos. En la gráfica de mujeres sin anticonceptivos, alrededor del día 5 del ciclo (que corresponde a la menstruación), los niveles de progesterona y estrógeno se encuentran en sus puntos más bajos, mientras que la FSH está en aumento. Una característica hormonal observada durante la menstruación, en mujeres que no planifican, consiste en que:",
+      "opciones": [
+        "hay una disminución en los niveles de progesterona",
+        "hay una disminución en los niveles de FSH",
+        "la producción de LH llega a su nivel más alto.",
+        "la producción de estrógenos llega a su nivel más alto."
+      ],
+      "correcta": 0,
+      "explicacion": "Durante la menstruación (inicio del ciclo), la gráfica muestra que la progesterona está en su punto más bajo (su caída al final del ciclo anterior es, de hecho, lo que desencadena la menstruación). La FSH en realidad empieza a subir en esos días (no baja), y tanto la LH como el estrógeno alcanzan su punto más alto a mitad del ciclo (alrededor del día 14), no durante la menstruación."
+    },
+    {
+      "id": "cn-080",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "indagacion",
+      "fuente": "cartilla-2025",
+      "numero": 80,
+      "contexto": {
+        "id": "ctx-079-080",
+        "texto": "Ver contexto de la pregunta 79 (misma gráfica \"Comportamiento de las hormonas a través del ciclo menstrual\").",
+        "imagen": null,
+        "imagenAlt": null
+      },
+      "enunciado": "Con el panel de mujeres \"Con anticonceptivos\" de la misma gráfica del ciclo menstrual: allí se observa que la progesterona (de origen sintético, aportada por el anticonceptivo) se mantiene alta y estable, mientras que la LH y la FSH permanecen aplanadas y muy por debajo de su pico natural. Una conclusión que se puede establecer a partir de los resultados es",
+      "opciones": [
+        "el déficit de LH promueve la liberación de FSH y estrógenos.",
+        "el déficit de FSH inhibe la producción de progesterona.",
+        "el aumento de progesterona inhibe la producción de LH y FSH.",
+        "el aumento de estrógenos promueve la producción de progesterona."
+      ],
+      "correcta": 2,
+      "explicacion": "En el panel \"con anticonceptivos\", la progesterona se mantiene alta y sostenida mientras que la LH y la FSH quedan suprimidas (aplanadas). Esto refleja el mecanismo real de los anticonceptivos hormonales: el aumento sostenido de progesterona genera una retroalimentación negativa sobre el eje hipotálamo-hipófisis que inhibe la producción de LH y FSH, evitando el pico de LH que dispara la ovulación."
+    },
+    {
+      "id": "cn-081",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "explicacion-de-fenomenos",
+      "fuente": "cartilla-2025",
+      "numero": 81,
+      "contexto": null,
+      "enunciado": "La figura muestra cómo la fotosíntesis y la respiración celular se involucran en la elaboración de energía y moléculas fundamentales para el desarrollo de las plantas: en el cloroplasto, la luz y el CO2 se usan para producir ATP y azúcares (fotosíntesis); esos azúcares alimentan tanto la producción de proteínas como la mitocondria, donde ocurre la respiración celular que también produce ATP. De acuerdo con lo anterior, si se sabe que la síntesis de proteínas es un proceso que requiere de energía y aminoácidos para su desarrollo, ¿cuál de estos procesos aporta elementos en la síntesis de proteínas de la planta?",
+      "opciones": [
+        "La fotosíntesis, porque las proteínas se sintetizan a partir del oxígeno que liberan las plantas.",
+        "La fotosíntesis, porque aporta energía y componentes para formar las proteínas.",
+        "La respiración, porque utiliza como fuente de energía la luz solar que une los aminoácidos a las proteínas.",
+        "La respiración, porque se lleva a cabo en el núcleo de la célula, donde también se realiza la síntesis de proteínas."
+      ],
+      "correcta": 1,
+      "explicacion": "Según el esquema, el cloroplasto (fotosíntesis) produce ATP (energía) y azúcares, y estos azúcares alimentan directamente la vía que conduce a la síntesis de proteínas, aportando tanto energía como los componentes (esqueletos de carbono a partir de los cuales se construyen aminoácidos) necesarios para ese proceso. La respiración celular no usa luz solar directamente (opción C, falsa) y ocurre en la mitocondria, no en el núcleo (opción D, falsa); las proteínas tampoco se forman a partir del oxígeno liberado (opción A, falsa)."
+    },
+    {
+      "id": "cn-082",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "uso-comprensivo",
+      "fuente": "cartilla-2025",
+      "numero": 82,
+      "contexto": null,
+      "enunciado": "La figura muestra un proceso que ocurre en el citoplasma de una célula eucariota: una vacuola con \"alimento\" ingerido se fusiona con una vacuola que contiene enzimas hidrolíticas producida a partir del aparato de Golgi (formando un lisosoma), y ese lisosoma digiere el contenido de la vacuola formando vacuolas digestivas; la figura también muestra un lisosoma dirigiéndose hacia un organelo dañado. De acuerdo con el proceso que se muestra en la figura, ¿cuál de las siguientes es una función de los lisosomas?",
+      "opciones": [
+        "Digerir partículas en el citoplasma.",
+        "Atrapar partículas fuera del citoplasma.",
+        "Producir nuevos aparatos de Golgi en el citoplasma.",
+        "Incrementar el tamaño de las vacuolas en el citoplasma."
+      ],
+      "correcta": 0,
+      "explicacion": "El esquema muestra a los lisosomas fusionándose con vacuolas que contienen material ingerido (o con organelos dañados) para digerirlos mediante sus enzimas hidrolíticas, un proceso que ocurre dentro del citoplasma de la célula. Los lisosomas no atrapan partículas fuera de la célula, no producen aparatos de Golgi, y su función no es simplemente agrandar vacuolas sino digerir su contenido."
+    },
+    {
+      "id": "cn-083",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "uso-comprensivo",
+      "fuente": "cartilla-2025",
+      "numero": 83,
+      "contexto": null,
+      "enunciado": "En un organismo multicelular que se reproduce sexualmente, luego de la unión de las células sexuales que lo originan, las células no sexuales comienzan a reproducirse rápidamente hasta organizarse para conformar los sistemas que constituyen al organismo. El proceso para la formación de estas células no sexuales consiste en:",
+      "opciones": [
+        "la división de una célula madre que origina dos células hijas con igual cantidad de información genética.",
+        "la unión de dos células madre con igual cantidad de información genética.",
+        "la división de una célula madre que origina dos células hijas con la mitad de la información genética.",
+        "la unión de una célula padre y una célula madre con la mitad de la información genética."
+      ],
+      "correcta": 0,
+      "explicacion": "El crecimiento y desarrollo de un organismo a partir del cigoto ocurre mediante mitosis: la división de una célula madre en dos células hijas genéticamente idénticas (con la misma cantidad de información genética que la célula madre). Las opciones que hablan de la mitad de la información genética (C y D) describen la meiosis, un proceso distinto que forma gametos (células sexuales), no las células somáticas del cuerpo."
+    },
+    {
+      "id": "cn-084",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "explicacion-de-fenomenos",
+      "fuente": "cartilla-2025",
+      "numero": 84,
+      "contexto": null,
+      "enunciado": "La fecundación externa es un fenómeno común en los organismos de vida acuática cuyos gametos son capaces de sobrevivir y desplazarse en el agua. Una posible estrategia de las plantas con flores para el movimiento de gametos en tierra firme sería:",
+      "opciones": [
+        "El transporte de polen por animales, como abejas y colibríes.",
+        "Los colores llamativos en los frutos, para atraer aves y monos.",
+        "Las semillas con estructuras aladas que les permite viajar una mayor distancia.",
+        "La disminución del tamaño del embrión lo cual facilitará su transporte."
+      ],
+      "correcta": 0,
+      "explicacion": "En el agua, los gametos pueden desplazarse nadando hasta encontrarse; en tierra firme, las plantas con flores no cuentan con ese medio líquido, así que recurren a polinizadores (como abejas y colibríes) que transportan el polen (que contiene los gametos masculinos) de una flor a otra. Las otras opciones se refieren a la dispersión de frutos o semillas (una etapa posterior, tras la fecundación), no al movimiento de los gametos en sí."
+    },
+    {
+      "id": "cn-085",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "uso-comprensivo",
+      "fuente": "cartilla-2025",
+      "numero": 85,
+      "contexto": null,
+      "enunciado": "A partir de un cruzamiento entre dos ratones amarillos, se obtienen los siguientes resultados en la descendencia (generación F1): 1/4 de las crías mueren tempranamente (genotipo YY), 1/2 son amarillas (genotipo Yy) y 1/4 no son amarillas (genotipo yy), donde Y (amarillo) es dominante y y (no amarillo) es recesivo. Teniendo en cuenta que el alelo amarillo (Y) al presentarse en homocigosis (YY) causa la muerte temprana del ratón, ¿cuáles son los genotipos de los padres?",
+      "opciones": [
+        "Ambos heterocigotos.",
+        "Ambos homocigotos.",
+        "Padre homocigoto recesivo y madre homocigota dominante.",
+        "Padre homocigoto y madre homocigota dominante."
+      ],
+      "correcta": 0,
+      "explicacion": "La proporción 1/4 : 1/2 : 1/4 (YY : Yy : yy) es la proporción clásica 1:2:1 que resulta de cruzar dos individuos heterocigotos (Yy x Yy). Además, como el genotipo YY es letal, ningún ratón amarillo vivo puede ser homocigoto dominante: todo ratón amarillo vivo (como los dos padres del cruce) tiene que ser heterocigoto (Yy). Esto confirma que ambos padres son heterocigotos."
+    },
+    {
+      "id": "cn-086",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "explicacion-de-fenomenos",
+      "fuente": "cartilla-2025",
+      "numero": 86,
+      "contexto": null,
+      "enunciado": "La figura muestra el ciclo biogeoquímico del carbono en un ecosistema marino: el fitoplancton realiza fotosíntesis absorbiendo CO2 atmosférico disuelto en el agua, es consumido por peces (que respiran liberando CO2) y una porción del carbono orgánico se deposita en el fondo marino. En las últimas décadas, la población de fitoplancton se ha reducido de manera considerable y ha afectado el equilibrio en los océanos. De acuerdo con la información anterior, ¿cuál de las siguientes opciones es una consecuencia probable de la disminución del fitoplancton en los océanos?",
+      "opciones": [
+        "Los peces tendrán que consumir más fitoplancton para absorber más CO2 atmosférico.",
+        "El carbono atrapado en el fondo liberaría las moléculas de oxígeno para la respiración de los animales terrestres.",
+        "El CO2 atmosférico se acumulará en el aire al no ser absorbido ni depositado en el fondo.",
+        "La fotosíntesis aumentaría considerablemente al tener más fuentes de carbono disponibles."
+      ],
+      "correcta": 2,
+      "explicacion": "El fitoplancton es el principal responsable de absorber CO2 atmosférico mediante fotosíntesis y, a través de la cadena trófica y la sedimentación, de depositar parte de ese carbono en el fondo marino. Si su población disminuye, se reduce tanto la absorción de CO2 como el depósito de carbono en el fondo, por lo que el CO2 atmosférico tiende a acumularse en el aire. Las demás opciones son contradictorias: si hay menos fitoplancton, no puede consumirse más (A) ni aumentar la fotosíntesis (D), y no hay ningún mecanismo por el cual el carbono del fondo libere oxígeno para animales terrestres (B)."
+    },
+    {
+      "id": "cn-087",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "uso-comprensivo",
+      "fuente": "cartilla-2025",
+      "numero": 87,
+      "contexto": null,
+      "enunciado": "La malaria aviar es una enfermedad causada por parásitos del género Plasmodium y es transmitida por la picadura de zancudos a diferentes especies de aves. En el ciclo de vida del parásito mostrado en el diagrama: el zancudo se alimenta de sangre infectada y el parásito se reproduce en su intestino \"sin afectar su funcionamiento\"; luego, al picar a un ave, transmite el parásito, que causa infección del hígado y daño de los glóbulos rojos del ave. Según el diagrama, ¿qué tipo de interacción tiene el parásito con el ave y con el zancudo?",
+      "opciones": [
+        "El parásito interactúa con el ave y con el zancudo de manera negativa, al causar la enfermedad de la malaria que deriva en daños internos en los dos organismos.",
+        "El parásito interactúa con el ave de manera negativa al causar la enfermedad, mientras que con el zancudo interactúa de manera neutral, dado que convive dentro de él sin causar ningún daño.",
+        "El parásito interactúa con el ave y con el zancudo de manera neutral, ya que convive con ellos para cumplir su ciclo de vida sin causar daño a ninguno de los dos.",
+        "El parásito interactúa con el ave de manera neutral, ya que el hígado es el único órgano afectado, mientras que con el zancudo interactúa de manera negativa, dado que se produce dentro de él."
+      ],
+      "correcta": 1,
+      "explicacion": "El propio diagrama indica que el parásito se reproduce en el intestino del zancudo \"sin afectar su funcionamiento\" (relación neutral con el vector), mientras que en el ave causa infección del hígado y daño a los glóbulos rojos (relación negativa, de parasitismo, con el hospedero). Por eso la interacción es negativa con el ave y neutral con el zancudo, como describe la opción B."
+    },
+    {
+      "id": "cn-088",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "explicacion-de-fenomenos",
+      "fuente": "cartilla-2025",
+      "numero": 88,
+      "contexto": null,
+      "enunciado": "En una isla, existe una especie de ave nectarívora que poliniza exclusivamente a una especie de árbol; este, a su vez, es la única fuente de alimento de una especie de hormiga que consume sus hojas. Las 3 especies son endémicas de esta isla. Recientemente, se introdujeron gatos domésticos en esta isla que rápidamente se asilvestraron y comenzaron a alimentarse de estas aves hasta el punto de extinguirlas. ¿Qué les ocurrirá a las hormigas con el pasar del tiempo?",
+      "opciones": [
+        "Se trasladarán a la isla más cercana para buscar la misma especie de árbol de la que obtiene su alimento.",
+        "Se convertirán en el nuevo agente polinizador de los árboles y servirán de alimento para las aves presentes.",
+        "No se verán perturbadas, porque los árboles continuarán reproduciéndose sin necesidad de polinizadores.",
+        "Se extinguirán, porque no tendrán alimento disponible y la especie de la cual se alimentaban dejará de existir."
+      ],
+      "correcta": 3,
+      "explicacion": "Al extinguirse las aves polinizadoras, el árbol (que depende exclusivamente de ellas para polinizarse) dejará de reproducirse y, con el paso del tiempo, su población desaparecerá. Como las hormigas dependen exclusivamente de las hojas de ese árbol como única fuente de alimento, al desaparecer el árbol también se quedarán sin alimento y se extinguirán. Las opciones A, B y C no son viables: las hormigas no pueden trasladarse a otra isla ni volverse polinizadoras, y los árboles sí necesitan al polinizador para reproducirse (son endémicos y dependen exclusivamente de él)."
+    },
+    {
+      "id": "cn-089",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "indagacion",
+      "fuente": "cartilla-2025",
+      "numero": 89,
+      "contexto": null,
+      "enunciado": "La digestión de alimentos vegetales es más compleja que la de alimentos de origen animal. Al observar la longitud del intestino de renacuajos de dos especies se observó que el de la especie 1 es más largo que el de la especie 2. A partir de esta información se podría pensar que posiblemente los renacuajos",
+      "opciones": [
+        "de la especie 1 son carnívoros y los de la especie 2 herbívoros.",
+        "de ambas especies son carnívoros.",
+        "de la especie 1 son herbívoros y los de la especie 2 carnívoros.",
+        "de ambas especies son herbívoros."
+      ],
+      "correcta": 2,
+      "explicacion": "Como digerir alimento vegetal es más complejo (y requiere más tiempo y superficie de absorción), los animales herbívoros tienden a tener intestinos más largos que los carnívoros. Como el intestino de la especie 1 es más largo que el de la especie 2, se puede inferir que la especie 1 es probablemente herbívora y la especie 2 carnívora."
+    },
+    {
+      "id": "cn-090",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "uso-comprensivo",
+      "fuente": "cartilla-2025",
+      "numero": 90,
+      "contexto": null,
+      "enunciado": "Para fines taxonómicos, los seres vivos pueden presentar dos tipos de estructuras: las estructuras análogas y las estructuras homólogas. Las estructuras análogas pueden tener una función y aspecto semejantes, pero sus antecedentes evolutivos son completamente distintos. Las estructuras homólogas, por su parte, tienen un origen común, aunque su función y aspecto pueden ser diferentes. El siguiente diagrama (cladograma) muestra las relaciones entre cinco grupos de organismos: en la base del árbol, el tronco común de los cinco organismos (vaca, ratón, lagarto, trucha y tiburón) comparte las características \"cordón nervioso dorsal, corazón con cámaras y maxilares\"; a partir de ahí se separa primero el tiburón; el resto comparte además \"esqueleto óseo\" y de ahí se separa la trucha; el resto comparte \"huevo amniota\" y de ahí se separa el lagarto; y finalmente la vaca y el ratón comparten además la característica \"pelo\". Según el diagrama, se puede afirmar que el",
+      "opciones": [
+        "Pelo es una estructura análoga entre el ratón y la vaca.",
+        "Esqueleto óseo separa evolutivamente a la trucha y al lagarto.",
+        "Cordón nervioso dorsal es una estructura homóloga a los cinco organismos.",
+        "Corazón con cámaras es una estructura análoga para tiburón y ratón."
+      ],
+      "correcta": 2,
+      "explicacion": "El cordón nervioso dorsal aparece en la base del cladograma, como una característica heredada del ancestro común a los cinco organismos, por lo que es una estructura homóloga compartida por los cinco (no análoga). El pelo, al ser una característica que comparten el ratón y la vaca por descender de un ancestro común más reciente (mamífero), también es homóloga, no análoga (opción A, falsa). El esqueleto óseo es compartido por la trucha, el lagarto, el ratón y la vaca (los agrupa, no los separa; lo que separa es la ausencia de esa característica en el tiburón), por lo que la opción B es falsa. El corazón con cámaras, al igual que el cordón nervioso dorsal, es una característica basal compartida por todos, homóloga y no análoga entre tiburón y ratón (opción D, falsa)."
+    },
+    {
+      "id": "cn-091",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "indagacion",
+      "fuente": "cartilla-2025",
+      "numero": 91,
+      "contexto": null,
+      "enunciado": "Un estudiante quiere saber cuál es la dieta principal del murciélago Sturnira aratathomasi. Para ello, recolecta muestras de excremento de 10 individuos y determina el tipo de alimento que consume usualmente esta especie: realiza el experimento (toma las muestras y analiza las sustancias presentes en el excremento), obtiene los resultados (encuentra semillas y pulpa de tomatillo) y concluye que los murciélagos de esta especie se alimentan principalmente de tomatillo. ¿Cuál es la forma más adecuada de presentar la investigación del estudiante?",
+      "opciones": [
+        "Solo con las secciones \"Experimento\" y \"Conclusión\", omitiendo los resultados obtenidos.",
+        "Solo con las secciones \"Experimento\" y \"Resultados\", sin presentar ninguna conclusión.",
+        "Solo con la sección \"Experimento\", sin presentar resultados ni conclusión por separado.",
+        "Con las tres secciones completas y en orden: \"Experimento\", \"Resultados\" y \"Conclusión\"."
+      ],
+      "correcta": 3,
+      "explicacion": "Una investigación científica bien presentada debe incluir, en orden, la descripción del experimento (metodología), los resultados obtenidos (los datos crudos: se encontraron semillas y pulpa de tomatillo) y, por último, la conclusión que se deriva de esos resultados (los murciélagos se alimentan principalmente de tomatillo). Omitir los resultados (opciones A y C) o no llegar a una conclusión explícita (opción B) deja la presentación incompleta."
+    },
+    {
+      "id": "cn-092",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "explicacion-de-fenomenos",
+      "fuente": "cartilla-2025",
+      "numero": 92,
+      "contexto": null,
+      "enunciado": "Si al ecosistema se incorpora un insecto cuyas larvas se alimentan en gran cantidad de la hierba, se verían perjudicados",
+      "opciones": [
+        "los conejos y las aves, porque disminuye la disponibilidad de alimento.",
+        "los zorros y las aves, porque se alimentan de las mismas presas.",
+        "los saltamontes y los ratones, porque serían cazados por los búhos.",
+        "los saltamontes y los conejos, porque aumentaría la competencia por el alimento."
+      ],
+      "correcta": 3,
+      "explicacion": "Un nuevo insecto cuyas larvas consumen grandes cantidades de hierba compite directamente por ese recurso con otros herbívoros que también se alimentan de hierba, como los saltamontes y los conejos, aumentando la competencia por el alimento disponible. Las otras opciones mezclan especies que no compiten por el mismo recurso (hierba) o atribuyen el perjuicio a una causa distinta (depredación por búhos), no a la competencia por alimento que introduce el nuevo insecto."
+    },
+    {
+      "id": "cn-093",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "uso-comprensivo",
+      "fuente": "cartilla-2025",
+      "numero": 93,
+      "contexto": null,
+      "enunciado": "El siguiente esquema muestra el ciclo de vida de un organismo con reproducción sexual: un adulto diploide (2n) produce, por meiosis, gametos haploides (n); dos gametos haploides (n) se combinan mediante fecundación para formar un cigoto diploide (2n); y ese cigoto, mediante mitosis, se desarrolla hasta convertirse de nuevo en un adulto diploide (2n). Seleccione la afirmación correcta.",
+      "opciones": [
+        "se fusionan los gametos para formar un organismo haploide.",
+        "se fusionan los gametos para formar un organismo diploide.",
+        "se dividen los gametos para formar un adulto haploide.",
+        "se dividen los gametos para formar un adulto diploide."
+      ],
+      "correcta": 1,
+      "explicacion": "Según el esquema, la fecundación consiste en la fusión (unión) de dos gametos haploides (n) para formar un cigoto diploide (2n), no un organismo haploide. Los gametos no se \"dividen\" para formar el adulto: es el cigoto el que se desarrolla en un adulto diploide mediante mitosis (división celular), un proceso distinto a lo que describen las opciones C y D."
+    },
     {
       "id": "cn-094",
       "materia": "ciencias-naturales",
@@ -48,6 +634,168 @@
       "explicacion": "La enfermedad es de herencia ligada al X recesiva. Los hombres (XY) tienen un solo cromosoma X: si ese X lleva el gen defectuoso, enferman porque no tienen un segundo X que compense. Las mujeres (XX) solo son portadoras si tienen un X afectado y uno normal. La A es incorrecta (los hombres no tienen dos X); la B y D son incorrectas (el gen no está en el Y)."
     },
     {
+      "id": "cn-096",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "cts",
+      "fuente": "cartilla-2025",
+      "numero": 96,
+      "contexto": null,
+      "enunciado": "El agua es considerada un recurso renovable; sin embargo, las actividades humanas contaminan rápidamente el agua potable y cada vez disponemos de menos. En un colegio realizan una campaña de sensibilización sobre el cuidado del agua, usando una imagen alusiva al recurso hídrico. El objetivo de la campaña consiste en",
+      "opciones": [
+        "incentivar el uso de recursos naturales para el desarrollo de las comunidades.",
+        "desarrollar tecnologías que permitan disminuir la contaminación atmosférica.",
+        "invitar a la conservación del recurso hídrico con nuestras acciones cotidianas.",
+        "motivar el cuidado de bosques en los países a través de políticas estatales."
+      ],
+      "correcta": 2,
+      "explicacion": "El planteamiento de la pregunta es explícito sobre el tema de la campaña: el agua como recurso renovable que se está contaminando y agotando. Por eso el objetivo de la campaña es invitar a conservar el recurso hídrico con acciones cotidianas (opción C). Las demás opciones se refieren a temas distintos: uso general de recursos naturales (A), contaminación atmosférica (B) y cuidado de bosques mediante políticas estatales (D), ninguno es el foco de una campaña sobre el agua."
+    },
+    {
+      "id": "cn-097",
+      "materia": "ciencias-naturales",
+      "componente": "quimica",
+      "competencia": "indagacion",
+      "fuente": "cartilla-2025",
+      "numero": 97,
+      "contexto": null,
+      "enunciado": "Juan tomó una olla y agregó un litro (1 L) de agua y lo mezcló con dos (2) cucharadas de sal; después calentó la mezcla y cuando observó que la mezcla empezó a hervir tomó la temperatura: esta fue 110°C. Él concluye que el aumento en la temperatura de ebullición del disolvente es directamente proporcional a la cantidad de sal agregada. Posteriormente, en su clase de Ciencias quiso mostrarles a sus compañeros que el agua podía hervir a esta temperatura, usando el mismo termómetro y la misma olla. Teniendo en cuenta la información anterior, si Juan quiere obtener los mismos resultados, ¿cuál o cuáles condiciones debe implementar?",
+      "opciones": [
+        "Mezclar cinco (5) cucharadas de sal con 10 L de agua.",
+        "Mezclar dos (2) cucharadas de sal con 1 L de agua.",
+        "Usar tres (3) cucharadas de sal únicamente.",
+        "Usar 2L de agua y no agregar sal."
+      ],
+      "correcta": 1,
+      "explicacion": "Para reproducir el mismo resultado experimental (ebullición a 110°C), Juan debe repetir exactamente las mismas condiciones que usó la primera vez: 2 cucharadas de sal disueltas en 1 L de agua. La opción A cambia la proporción sal/agua (5 cucharadas en 10 L es una concentración mucho menor que 2 cucharadas en 1 L, no produciría el mismo efecto), la C no especifica la cantidad de agua, y la D elimina la sal por completo, con lo cual el agua herviría a 100°C, no a 110°C."
+    },
+    {
+      "id": "cn-098",
+      "materia": "ciencias-naturales",
+      "componente": "quimica",
+      "competencia": "indagacion",
+      "fuente": "cartilla-2025",
+      "numero": 98,
+      "contexto": null,
+      "enunciado": "Un estudiante realizó el siguiente experimento: agregó 100 mL de agua con levaduras en un recipiente y lo calentó en una estufa, midiendo el volumen del agua y contabilizando el número de células de levaduras cada dos minutos. Los resultados se muestran en la tabla: a los 2, 4 y 6 minutos, la temperatura fue 10°C, 30°C y 60°C, el volumen se mantuvo en 100 mL y el número de levaduras en 500; a los 8 minutos, la temperatura llegó a 100°C, el volumen bajó a 80 mL y las levaduras a 400; y a los 10 minutos, con la temperatura ya en 100°C, el volumen bajó a 60 mL y las levaduras a 300. Si la tendencia se mantiene, ¿cuál sería el volumen del agua a los 12 minutos?",
+      "opciones": [
+        "Entre 120 mL y 100 mL",
+        "Menor a 60mL",
+        "Menor a 300 mL",
+        "Entre 80 mL y 60 mL"
+      ],
+      "correcta": 1,
+      "explicacion": "Una vez que el agua alcanza los 100°C (su punto de ebullición) a los 8 minutos, el volumen desciende de forma constante por evaporación: baja 20 mL cada 2 minutos (de 100 mL a 80 mL entre el minuto 6 y 8, y de 80 mL a 60 mL entre el minuto 8 y 10). Si esa tendencia continúa, a los 12 minutos el volumen bajaría a aproximadamente 40 mL, es decir, un valor menor a 60 mL (opción B). Las opciones A, C y D no reflejan correctamente la proyección de esa tendencia decreciente y constante."
+    },
+    {
+      "id": "cn-099",
+      "materia": "ciencias-naturales",
+      "componente": "quimica",
+      "competencia": "indagacion",
+      "fuente": "cartilla-2025",
+      "numero": 99,
+      "contexto": null,
+      "enunciado": "Un estudiante analiza cómo cambia la solubilidad de una mezcla de sólido M disolviendo distintas cantidades del sólido en 20 gramos de agua destilada y registrando la temperatura a la cual se disuelve completamente: 20 g de sólido M necesitan 57°C, 25 g necesitan 65°C, 30 g necesitan 73°C y 35 g necesitan 83°C (siempre en 20 g de agua). Teniendo en cuenta lo observado, el estudiante cree que si a 83°C se agregan 50 gramos de sólido M en 40 gramos de agua destilada, no se solubilizará completamente esta cantidad de sólido M. ¿La suposición del estudiante es correcta?",
+      "opciones": [
+        "Sí, porque para disolver esta cantidad de sólido M en 40 gramos de agua también se necesitaría el doble de temperatura, es decir, 166°C.",
+        "No, porque al tener el doble de agua, es más probable que el sólido M solo necesite la mitad de la temperatura para disolverse, es decir, 42°C.",
+        "No, porque a partir de 65°C se pueden disolver completamente 50 g de sólido M en 40 gramos de agua, por lo que a 83°C el sólido estará completamente disuelto.",
+        "Sí, porque con masas mayores a 35 gramos de sólido M, se necesitarían temperaturas mayores que 83°C para disolverlo en esa cantidad de agua."
+      ],
+      "correcta": 2,
+      "explicacion": "Lo relevante no es la masa de soluto por sí sola, sino la concentración (masa de soluto por gramo de agua). La razón 50 g de sólido M en 40 g de agua es la misma concentración que 25 g de sólido M en 20 g de agua (ambas son 1,25 g de sólido por gramo de agua), y esa concentración ya se disuelve completamente a 65°C según la tabla. Como 83°C es una temperatura mayor a 65°C, los 50 g de sólido M sí se disolverán completamente en 40 g de agua a 83°C, por lo que la suposición del estudiante (de que NO se disolverá) es incorrecta. Las opciones A, B y D calculan mal la relación entre masa de soluto, masa de agua y temperatura de disolución."
+    },
+    {
+      "id": "cn-100",
+      "materia": "ciencias-naturales",
+      "componente": "quimica",
+      "competencia": "indagacion",
+      "fuente": "cartilla-2025",
+      "numero": 100,
+      "contexto": null,
+      "enunciado": "Una estación de monitoreo de calidad del aire analiza la concentración de dióxido de nitrógeno (NO2) y ozono (O3) durante un día. Los resultados muestran que el O3 tiene concentraciones bajas en la madrugada (1,70 ppb a la 1:00, 4,17 ppb a las 4:00), sube durante el día hasta un máximo alrededor de las 16:00-19:00 (23,76 ppb a las 16:00) y vuelve a bajar en la noche (3,76 ppb a las 22:00); mientras que el NO2 muestra el patrón inverso: alto en la madrugada y la noche (19,34 ppb a la 1:00, 18,30 ppb a las 22:00) y bajo al mediodía (3,19 ppb a las 13:00). De acuerdo con la tabla, ¿cuál de las siguientes gráficas representa los resultados correctamente?",
+      "opciones": [
+        "Una gráfica en la que ambas curvas (O3 y NO2) suben y bajan de forma similar y en fase, con dos picos cada una a lo largo del día.",
+        "Una gráfica en la que la curva de O3 sube desde un valor bajo en la madrugada hasta un pico entre las 13:00 y las 19:00, y la curva de NO2 hace lo opuesto: parte alta en la madrugada, baja a un mínimo a mediodía y vuelve a subir en la noche.",
+        "Una gráfica en la que ambas curvas tienen la forma de una sola joroba centrada al mediodía, prácticamente superpuestas.",
+        "Una gráfica en la que ambas curvas descienden juntas hacia un mínimo a mediodía y suben juntas de nuevo en la noche."
+      ],
+      "correcta": 1,
+      "explicacion": "Los datos de la tabla muestran que el O3 y el NO2 varían en fases opuestas a lo largo del día: el O3 es bajo de noche/madrugada y alto a mediodía/tarde (por la formación fotoquímica que depende de la luz solar), mientras que el NO2 es alto de noche/madrugada y bajo a mediodía. Solo la opción B refleja correctamente ese comportamiento inverso entre las dos sustancias; las demás opciones muestran a ambas curvas moviéndose en la misma dirección (en fase), lo cual contradice los datos de la tabla."
+    },
+    {
+      "id": "cn-101",
+      "materia": "ciencias-naturales",
+      "componente": "quimica",
+      "competencia": "indagacion",
+      "fuente": "cartilla-2025",
+      "numero": 101,
+      "contexto": null,
+      "enunciado": "Un grupo de estudiantes realizó un experimento que consistía en sumergir una esponja en líquidos de diferente densidad, para luego medir su volumen y masa. En la gráfica se presentan los resultados marcados con puntos (que van aproximadamente de 0,6 g/cm³ y 15 g de masa, hasta 1,4 g/cm³ y 45 g de masa) y una línea de tendencia que, al trazarse hacia densidades menores, no pasa por el origen (corta el eje de la masa en un valor mayor a cero cuando la densidad es cero). Un estudiante afirma que si se usa un líquido con una densidad extremadamente baja, la masa registrada será diferente de cero. ¿Esta afirmación puede considerarse una predicción basada en los datos experimentales?",
+      "opciones": [
+        "Sí, porque la línea de tendencia cruza en un punto diferente de cero.",
+        "No, porque no se observa ningún patrón entre la densidad y la masa.",
+        "No, porque no existen datos que usen líquidos con muy baja densidad.",
+        "Sí, porque todos los datos presentan masas diferentes de cero."
+      ],
+      "correcta": 0,
+      "explicacion": "Una predicción basada en datos experimentales se apoya en extrapolar la tendencia (la línea que mejor ajusta los datos observados) más allá del rango medido. Como la línea de tendencia de la gráfica no pasa por el origen (corta el eje de masa en un valor distinto de cero cuando la densidad tiende a cero), es válido predecir, extrapolando esa línea, que a densidades extremadamente bajas la masa seguiría siendo diferente de cero. La opción C confunde \"no hay datos medidos en ese rango\" con \"no se puede predecir\": precisamente para eso sirve extrapolar una tendencia."
+    },
+    {
+      "id": "cn-102",
+      "materia": "ciencias-naturales",
+      "componente": "quimica",
+      "competencia": "indagacion",
+      "fuente": "cartilla-2025",
+      "numero": 102,
+      "contexto": null,
+      "enunciado": "Un estudiante desea comparar los valores de las densidades de tres líquidos (agua, etanol y aceite) y para ello hace tres mediciones de una misma masa de líquido (100 g) a tres temperaturas. Los resultados fueron: para el agua, a 6°C, 17°C y 22°C, densidades de 0,99999, 0,99886 y 0,99786 g/cm³; para el etanol, a 3°C, 8°C y 34°C, densidades de 0,80374, 0,79955 y 0,77756 g/cm³; y para el aceite, a 10°C, 20°C y 30°C, densidades de 0,92252, 0,91553 y 0,90852 g/cm³. Con base en la anterior información se puede afirmar que el experimento del estudiante está mal planteado, porque",
+      "opciones": [
+        "las temperaturas empleadas no son las mismas, por lo que no se pueden hacer comparaciones entre las densidades de los tres líquidos.",
+        "no se pueden hacer comparaciones sin medir diferentes volúmenes de los tres líquidos en las temperaturas indicadas.",
+        "es necesario realizar otras mediciones a temperaturas más altas, para saber si el valor de la densidad sigue cambiando.",
+        "el aceite posee propiedades físicas y químicas muy diferentes del agua y del etanol y esto hace que no se puedan comparar."
+      ],
+      "correcta": 0,
+      "explicacion": "Como la densidad de un líquido cambia con la temperatura, para comparar de forma válida las densidades de varios líquidos hay que medirlas a las mismas temperaturas (controlando esa variable). En este experimento, el estudiante usó temperaturas distintas para cada uno de los tres líquidos (ninguna temperatura se repite entre agua, etanol y aceite), lo que impide una comparación justa entre ellos. Las demás opciones no señalan el verdadero problema metodológico del experimento."
+    },
+    {
+      "id": "cn-103",
+      "materia": "ciencias-naturales",
+      "componente": "quimica",
+      "competencia": "indagacion",
+      "fuente": "cartilla-2025",
+      "numero": 103,
+      "contexto": null,
+      "enunciado": "Una estudiante realiza diferentes ensayos con el objetivo de determinar el efecto de la concentración de los reactivos sobre la velocidad de formación de W en la reacción X + Y → W. En cada ensayo mide la velocidad de formación de W manteniendo constante la concentración de uno de los reactivos y variando la del otro. Los resultados muestran que, al variar la concentración de X (manteniendo constante la de Y), la velocidad de formación de W aumenta de forma aproximadamente lineal a medida que aumenta la concentración de X; en cambio, al variar la concentración de Y (manteniendo constante la de X), la velocidad de formación de W se mantiene prácticamente constante (una línea plana), sin importar el valor de la concentración de Y. Con base en estos resultados se puede concluir que el cambio en la velocidad de formación de W:",
+      "opciones": [
+        "no depende de la concentración de los reactivos.",
+        "depende de la concentración de ambos reactivos.",
+        "depende solamente de la concentración de X.",
+        "depende solamente de la concentración de Y."
+      ],
+      "correcta": 2,
+      "explicacion": "La gráfica donde varía la concentración de X muestra un claro aumento de la velocidad de formación de W (relación entre las dos variables), mientras que la gráfica donde varía la concentración de Y muestra una línea plana (la velocidad no cambia sin importar la concentración de Y). Esto indica que la velocidad de la reacción depende solamente de la concentración de X, no de la de Y."
+    },
+    {
+      "id": "cn-104",
+      "materia": "ciencias-naturales",
+      "componente": "quimica",
+      "competencia": "indagacion",
+      "fuente": "cartilla-2025",
+      "numero": 104,
+      "contexto": null,
+      "enunciado": "La conductividad de una disolución es la capacidad que tiene esta para conducir la corriente eléctrica. Un estudiante realiza una serie de experimentos para estudiar la conductividad de un tipo de sal (MgSO4) disuelta en agua, manteniendo la temperatura constante en 25°C y variando la concentración de la sal (en mol/L) en el eje horizontal, mientras mide la conductividad resultante en el eje vertical. Con base en la anterior información, en este experimento el estudiante buscaba estudiar",
+      "opciones": [
+        "la influencia de la temperatura sobre la conductividad.",
+        "el efecto de la conductividad de la disolución sobre la concentración de la sal.",
+        "la influencia de la carga de los iones sobre la conductividad.",
+        "el efecto de la concentración de la sal sobre la conductividad de la disolución."
+      ],
+      "correcta": 3,
+      "explicacion": "En este experimento, la temperatura se mantuvo fija (controlada) en 25°C, y la única variable que se modificó fue la concentración de la sal MgSO4, midiendo cómo cambiaba la conductividad en respuesta a ese cambio. Por lo tanto, el objetivo del experimento era estudiar el efecto de la concentración de la sal sobre la conductividad de la disolución, no el efecto de la temperatura (que se mantuvo constante) ni de la carga de los iones (que no se varió)."
+    },
+    {
       "id": "cn-105",
       "materia": "ciencias-naturales",
       "componente": "quimica",
@@ -64,6 +812,24 @@
       ],
       "correcta": 2,
       "explicacion": "La ecuación balanceada muestra una relación 1:2 entre CH4 (o el CO2 que produce) y O2: por cada mol de CO2 formado se consumen 2 moles de O2. Si se obtuvieron 1,5 moles de CO2, se consumieron 1,5 × 2 = 3,0 moles de O2. Por eso la opción C es correcta."
+    },
+    {
+      "id": "cn-106",
+      "materia": "ciencias-naturales",
+      "componente": "quimica",
+      "competencia": "explicacion-de-fenomenos",
+      "fuente": "cartilla-2025",
+      "numero": 106,
+      "contexto": null,
+      "enunciado": "En una clase de Ciencias se da a conocer el papel de los catalizadores en una reacción: gracias a ellos, los reactivos tardan menos en formar nuevos productos, ya que la energía de activación disminuye, y esto hace que se aumente la velocidad de la reacción. El profesor muestra tres gráficas de energía contra avance de la reacción: en la gráfica (1), sin catalizador, la curva alcanza un pico de energía de activación relativamente alto; en la gráfica (2), con catalizador, el pico de energía de activación es más bajo que en (1); y en la gráfica (3), con un catalizador inhibidor, el pico de energía de activación es más alto que en (1). ¿Qué tendencia en la energía de activación y en la velocidad de la reacción se puede observar en las gráficas?",
+      "opciones": [
+        "En presencia de un inhibidor, tanto la energía de activación como la velocidad de la reacción disminuyen.",
+        "En presencia de un catalizador, la energía de activación disminuye y la velocidad de la reacción aumenta.",
+        "Cuando no se tiene un catalizador, la energía de activación es mayor y esto hace que la velocidad de la reacción aumente.",
+        "Cuando se tiene un inhibidor, la energía de activación disminuye y esto hace que la velocidad de la reacción aumente."
+      ],
+      "correcta": 1,
+      "explicacion": "Las gráficas muestran que, con catalizador (2), el pico de energía de activación es más bajo que sin catalizador (1), lo que efectivamente aumenta la velocidad de la reacción (opción B, correcta y coherente con la explicación del profesor). El inhibidor (3), en cambio, aumenta la energía de activación (mayor pico), lo que reduce la velocidad de la reacción — justo lo contrario de lo que dicen las opciones A y D (que afirman incorrectamente que el inhibidor disminuye la energía de activación o que ambas magnitudes bajan juntas). La opción C invierte la relación física correcta: una mayor energía de activación (sin catalizador) hace la reacción más lenta, no más rápida."
     }
   ]
 }
