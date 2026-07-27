@@ -1,0 +1,69 @@
+{
+  "_readme": "Banco de preguntas de Ciencias Naturales extraído de Insumos/Cartilla 2025 Pre-Icfes Sotavento.pdf. Ver PLAN_SIMULACROS.md para metodología de extracción y src/data/competencias.json para la taxonomía de competencia usada. Este es un subconjunto inicial (3 de ~49 preguntas de Física/Biología/Química de la Cartilla) — el resto queda para el issue de curación de contenido derivado de BIO-9.",
+  "preguntas": [
+    {
+      "id": "cn-094",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "indagacion",
+      "fuente": "cartilla-2025",
+      "numero": 94,
+      "contexto": {
+        "id": "ctx-094-095",
+        "texto": "En una clínica especializada en genética, se realizó un estudio a una familia que presentaba una rara enfermedad hereditaria. Con los datos recopilados se construyó el siguiente árbol genealógico:",
+        "imagen": "/sotaweb/images/genetica.png",
+        "imagenAlt": "Árbol genealógico — herencia genética ligada al X"
+      },
+      "enunciado": "La pregunta de investigación que se resolvió con el estudio es:",
+      "opciones": [
+        "¿Cuáles son los síntomas más frecuentes de la enfermedad?",
+        "¿Cuál es el tratamiento para evitar que los padres hereden la enfermedad?",
+        "¿Qué individuos son más susceptibles de contagiarse de la enfermedad?",
+        "¿Cuál es el patrón de herencia del gen que provoca la enfermedad?"
+      ],
+      "correcta": 3,
+      "explicacion": "La opción D es correcta porque el árbol genealógico es una herramienta para determinar cómo se hereda un gen, no sus síntomas ni tratamiento. Las otras opciones apuntan a preguntas clínicas (síntomas, tratamiento, contagio) que no se responden con un árbol genealógico."
+    },
+    {
+      "id": "cn-095",
+      "materia": "ciencias-naturales",
+      "componente": "biologia",
+      "competencia": "explicacion-de-fenomenos",
+      "fuente": "cartilla-2025",
+      "numero": 95,
+      "contexto": {
+        "id": "ctx-094-095",
+        "texto": "En una clínica especializada en genética, se realizó un estudio a una familia que presentaba una rara enfermedad hereditaria. Con los datos recopilados se construyó el siguiente árbol genealógico:",
+        "imagen": "/sotaweb/images/genetica.png",
+        "imagenAlt": "Árbol genealógico — herencia genética ligada al X"
+      },
+      "enunciado": "En el árbol genealógico se observan hombres afectados porque estos tienen:",
+      "opciones": [
+        "dos cromosomas X, cada uno con el gen causante de la enfermedad.",
+        "un solo cromosoma Y, donde está el gen recesivo que causa la enfermedad.",
+        "un cromosoma X, donde está el gen defectuoso que transmiten a sus hijos.",
+        "dos cromosomas Y, donde están los genes defectuosos de la enfermedad."
+      ],
+      "correcta": 2,
+      "explicacion": "La enfermedad es de herencia ligada al X recesiva. Los hombres (XY) tienen un solo cromosoma X: si ese X lleva el gen defectuoso, enferman porque no tienen un segundo X que compense. Las mujeres (XX) solo son portadoras si tienen un X afectado y uno normal. La A es incorrecta (los hombres no tienen dos X); la B y D son incorrectas (el gen no está en el Y)."
+    },
+    {
+      "id": "cn-105",
+      "materia": "ciencias-naturales",
+      "componente": "quimica",
+      "competencia": "uso-comprensivo",
+      "fuente": "cartilla-2025",
+      "numero": 105,
+      "contexto": null,
+      "enunciado": "El gas natural está formado por una mezcla de hidrocarburos (compuestos que contienen carbono e hidrógeno) y uno de estos es el metano (CH4); cuando el metano hace combustión se genera dióxido de carbono, agua y energía, tal como se muestra en la siguiente ecuación balanceada: CH4 + 2O2 → CO2 + 2H2O + energía. Si se sabe que la estequiometría se encarga de medir la cantidad de materia consumida y producida durante una reacción química y que al final de la reacción de combustión se obtuvieron 1,5 moles de CO2, ¿cuántas moles de oxígeno se consumieron en la reacción?",
+      "opciones": [
+        "2,0 moles de O2.",
+        "1,5 moles de O2.",
+        "3,0 moles de O2.",
+        "4,0 moles de O2."
+      ],
+      "correcta": 2,
+      "explicacion": "La ecuación balanceada muestra una relación 1:2 entre CH4 (o el CO2 que produce) y O2: por cada mol de CO2 formado se consumen 2 moles de O2. Si se obtuvieron 1,5 moles de CO2, se consumieron 1,5 × 2 = 3,0 moles de O2. Por eso la opción C es correcta."
+    }
+  ]
+}

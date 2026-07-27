@@ -1,0 +1,28 @@
+{
+  "_readme": "Taxonomía de competencias para Ciencias Naturales (Física/Biología/Química). Ver PLAN_SIMULACROS.md §3.3 y §6 para el contexto completo de esta decisión.",
+  "_decision": "El issue BIO-9 pidió 4 competencias, pero el marco oficial ICFES para Ciencias Naturales solo define 3 (uso-comprensivo, explicacion-fenomenos, indagacion). La Cartilla 2025 no etiqueta 'Competencia N' en las secciones de Física/Biología/Química (a diferencia de Sociales y Matemáticas), pero SÍ usa la etiqueta 'CIENCIA, TECNOLOGÍA Y SOCIEDAD' como encabezado temático antes de las preguntas 94-96 (pág. 35 del PDF). Se adoptó esa cuarta categoría por venir directamente de la fuente, no por ser inventada. Esta decisión quedó pendiente de confirmación explícita en la interacción de aprobación del plan (aceptada sin responder las 3 preguntas abiertas) — es reversible: cambiar este archivo no requiere re-etiquetar el JSON de preguntas, solo el campo 'competencia' de cada una si se decide otra taxonomía.",
+  "materia": "ciencias-naturales",
+  "competencias": [
+    {
+      "id": "uso-comprensivo",
+      "nombre": "Uso comprensivo del conocimiento científico",
+      "descripcion": "Comprender y usar conceptos, teorías y leyes de las ciencias naturales para interpretar situaciones y resolver problemas."
+    },
+    {
+      "id": "explicacion-de-fenomenos",
+      "nombre": "Explicación de fenómenos",
+      "descripcion": "Construir explicaciones y comprender argumentos y modelos que den razón de fenómenos naturales."
+    },
+    {
+      "id": "indagacion",
+      "nombre": "Indagación",
+      "descripcion": "Comprender que a partir de la investigación científica se construyen explicaciones sobre el mundo natural; plantear preguntas, analizar datos y evaluar métodos."
+    },
+    {
+      "id": "cts",
+      "nombre": "Ciencia, Tecnología y Sociedad",
+      "descripcion": "Reconocer las relaciones e implicaciones entre el desarrollo científico-tecnológico y la sociedad. Categoría tomada directamente del encabezado de la Cartilla 2025 (pág. 35).",
+      "fuente": "cartilla-2025-pag-35"
+    }
+  ]
+}

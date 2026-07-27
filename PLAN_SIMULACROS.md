@@ -1,6 +1,6 @@
 # Plan — Simulacro real (a partir de los insumos en `Insumos/`)
 
-> Estado: **propuesta, pendiente de aprobación**. No implementar hasta confirmar las secciones marcadas ⚠️.
+> Estado: **aprobado (confirmación aceptada sin respuestas textuales a las 3 preguntas de la sección 6)**. Fase B arrancó con decisiones documentadas por defecto — ver sección 6 actualizada. `simulacro.astro` ya consume `src/data/preguntas-ciencias.json` en vez del array hardcodeado; el banco tiene 3 de ~49 preguntas de Ciencias Naturales. El resto de la extracción y el pipeline de imágenes quedaron en issues hijas de BIO-9.
 
 ## 1. Qué hay realmente en `Insumos/` (auditoría de las fuentes)
 
@@ -41,11 +41,12 @@ Cada PDF trae figuras incrustadas (gráficos, árboles genealógicos, diagramas 
 - Guardar el resultado final en `public/images/simulacro/` con nombre estable (`q-<id>.png`), commiteado al repo (son pocas decenas de imágenes, no un dataset masivo).
 - ⚠️ Esto es trabajo manual/semi-asistido por pregunta, no algo que se resuelva con una función en el sitio — se hace una vez como parte de la construcción del banco, no en cada visita de un estudiante.
 
-### 3.3 Clasificación por competencias ⚠️ (necesita definición antes de implementar)
+### 3.3 Clasificación por competencias — ✅ decisión tomada (default documentado, no confirmado por texto)
 - Ciencias Sociales y Matemáticas **ya vienen etiquetadas** en la Cartilla con su competencia explícita (`Competencia 1/2/3: ...`) → extracción directa, sin ambigüedad.
-- **Ciencias Naturales (Física/Biología/Química) NO trae competencia etiquetada en el PDF** — solo el "componente del saber" (la sub-materia). Clasificar cada pregunta en su competencia va a requerir un paso de etiquetado (asistido por IA + revisión humana, ya que es criterio pedagógico).
-- El marco oficial del ICFES para Ciencias Naturales define **3** competencias: *Uso comprensivo del conocimiento científico*, *Explicación de fenómenos*, *Indagación*. El issue menciona **4** — necesito que confirmes cuál es la cuarta que querés usar (¿una categoría propia del proceso, tipo "Ciencia, Tecnología y Sociedad"? ¿o contás las 3 sub-materias + una transversal?) antes de fijar el esquema de datos y hacer el etiquetado, porque cambiar la taxonomía después implica re-etiquetar todo el banco.
-- Objetivo de negocio de esto (según el issue): poder agregar resultados por competencia para identificar en qué está fallando cada estudiante → esto también define qué necesitamos guardar en el historial de resultados (no solo si acertó, sino su competencia).
+- **Ciencias Naturales (Física/Biología/Química) NO trae competencia etiquetada en el PDF** — solo el "componente del saber" (la sub-materia). Clasificar cada pregunta en su competencia requiere un paso de etiquetado (asistido por IA + revisión humana, ya que es criterio pedagógico).
+- **Taxonomía adoptada** (`src/data/competencias.json`): las 3 competencias oficiales del ICFES para Ciencias Naturales (*Uso comprensivo del conocimiento científico*, *Explicación de fenómenos*, *Indagación*) + una cuarta, **"Ciencia, Tecnología y Sociedad"**, tomada directamente del encabezado temático que trae la propia Cartilla 2025 antes de las preguntas 94-96 (pág. 35: "HERENCIA Y METODOLOGÍA DE LA INVESTIGACIÓN CIENCIA, TECNOLOGÍA Y SOCIEDAD"). No es una categoría inventada — viene de la fuente.
+- La confirmación del plan fue **aceptada** en el hilo del issue, pero sin responder por texto las 3 preguntas abiertas (taxonomía, upscaling, alcance). Ante eso, se procedió con esta decisión documentada y reversible: el archivo `src/data/competencias.json` centraliza la taxonomía, así que cambiarla no implica tocar el código de `simulacro.astro`, solo re-etiquetar el campo `competencia` de cada pregunta en `preguntas-ciencias.json` (o el equivalente cuando exista el banco completo).
+- El resultado del simulacro ya muestra desempeño por competencia (barras en pantalla de resultados) cuando hay más de una competencia entre las preguntas mostradas — esto es lo que pide el issue para "identificar dónde están fallando los pelados".
 
 ### 4. Modelo de datos propuesto
 Reemplazar el array `PREGUNTAS` hardcodeado en `simulacro.astro` por un banco de preguntas en JSON, versionado en `src/data/`:
@@ -78,8 +79,8 @@ Esto habilita, sin backend (sigue siendo estático + localStorage como ya está 
 3. **Fase C — Resto de áreas:** repetir el pipeline con Sesión 1 (Lectura Crítica, Matemáticas) y Sesión 2 (Inglés, Sociales), que ya vienen con competencias explícitas en el PDF así que el etiquetado es mecánico, no manual.
 4. **Fase D:** selector de área/materia en pantalla de inicio (ya en roadmap Fase 2 de `DESARROLLO.md`).
 
-## 6. Preguntas abiertas para vos (bloquean Fase B)
+## 6. Preguntas abiertas — estado tras la confirmación aceptada sin respuesta textual
 
-1. **Taxonomía de competencias de Ciencias:** ¿cuáles son las 4 competencias exactas que querés usar? (el ICFES oficial define 3 — necesito la cuarta o el criterio de split).
-2. **Servicio de upscaling de imágenes:** ¿tenés preferencia/presupuesto para una API de imagen (ej. Replicate/Real-ESRGAN hosted), o preferís que use una herramienta local/gratuita aunque el resultado sea más limitado?
-3. **Alcance de esta iteración:** ¿arrancamos solo con Ciencias Naturales (como pide el issue) y dejamos Sesión 1/2 para después, o preferís que arranque el pipeline genérico para las 6 áreas de una?
+1. ~~**Taxonomía de competencias de Ciencias**~~ → **resuelto con default documentado** (ver §3.3): 3 competencias ICFES + "Ciencia, Tecnología y Sociedad" tomada de la propia Cartilla. Reversible vía `src/data/competencias.json` si preferís otra.
+2. **Servicio de upscaling de imágenes:** sigue sin definir. No se llamó a ningún servicio de pago sin autorización explícita. Delegado a issue hija (pipeline de imágenes) — se implementará el resto del pipeline (extracción, filtrado <500px) dejando el paso de upscaling como TODO explícito hasta que se confirme presupuesto/servicio.
+3. **Alcance de esta iteración:** se interpretó como **Ciencias Naturales primero**, tal como pide el issue original ("Sciences have 4 competences"). Sesión 1/2 (Lectura Crítica, Matemáticas, Inglés, Sociales) quedan para una fase posterior, ya explícitamente fuera del foco del issue.

@@ -14,11 +14,11 @@ import Layout from '../layouts/Layout.astro';
       <h1 class="font-display text-5xl font-semibold text-dark leading-tight mb-3">
         Ciencias Naturales
       </h1>
-      <p class="text-dark-muted mb-2">Herencia y metodología de la investigación</p>
+      <p class="text-dark-muted mb-2">Física, Biología y Química</p>
       <div class="w-10 h-0.5 bg-olive mb-8"></div>
 
       <div class="bg-cream-light border border-olive/20 rounded-sm p-6 mb-8 space-y-2 text-sm text-dark-muted">
-        <p><span class="font-medium text-dark">2 preguntas</span> reales de la Cartilla 2025 Sotavento</p>
+        <p><span class="font-medium text-dark" id="setup-count">preguntas</span> reales de la Cartilla 2025 Sotavento</p>
         <p><span class="font-medium text-dark">2 minutos</span> por pregunta</p>
         <p><span class="font-medium text-dark">IA disponible</span> para pistas y explicaciones</p>
       </div>
@@ -57,17 +57,15 @@ import Layout from '../layouts/Layout.astro';
 
     <div class="max-w-3xl mx-auto px-6 py-12 w-full flex-1">
 
-      <!-- Context box (shared for both questions) -->
-      <div class="bg-dark rounded-sm p-6 mb-8">
-        <p class="text-xs font-medium text-olive uppercase tracking-widest mb-3">Contexto — preguntas 94 y 95</p>
-        <p class="text-cream/80 text-sm leading-relaxed mb-4">
-          En una clínica especializada en genética, se realizó un estudio a una familia que presentaba una rara enfermedad hereditaria.
-          Con los datos recopilados se construyó el siguiente árbol genealógico:
-        </p>
+      <!-- Context box (shown only when the current question has shared contexto) -->
+      <div id="context-box" class="hidden bg-dark rounded-sm p-6 mb-8">
+        <p class="text-xs font-medium text-olive uppercase tracking-widest mb-3" id="context-label">Contexto</p>
+        <p class="text-cream/80 text-sm leading-relaxed mb-4" id="context-texto"></p>
         <img
-          src="/sotaweb/images/genetica.png"
-          alt="Árbol genealógico — herencia genética ligada al X"
-          class="w-full rounded-sm bg-white p-3"
+          id="context-imagen"
+          src=""
+          alt=""
+          class="hidden w-full rounded-sm bg-white p-3"
         />
       </div>
 
@@ -141,6 +139,12 @@ import Layout from '../layouts/Layout.astro';
     <h2 class="font-display text-4xl font-semibold text-dark mb-2" id="result-score"></h2>
     <div class="w-10 h-0.5 bg-olive mb-10"></div>
 
+    <!-- Per-competencia breakdown: shows where the student is struggling -->
+    <div id="competencia-breakdown" class="hidden mb-12">
+      <p class="text-xs font-medium text-dark-muted uppercase tracking-widest mb-4">Desempeño por competencia</p>
+      <div id="competencia-bars" class="space-y-3"></div>
+    </div>
+
     <div id="result-review" class="space-y-6 mb-12"></div>
 
     <!-- AI study recommendation -->
@@ -163,40 +167,18 @@ import Layout from '../layouts/Layout.astro';
   </div>
 
   <script>
+    import preguntasData from '../data/preguntas-ciencias.json';
+    import competenciasData from '../data/competencias.json';
+
     const LETRAS = ['A', 'B', 'C', 'D'];
-
-    const PREGUNTAS = [
-      {
-        numero: 94,
-        enunciado: 'La pregunta de investigación que se resolvió con el estudio es:',
-        opciones: [
-          '¿Cuáles son los síntomas más frecuentes de la enfermedad?',
-          '¿Cuál es el tratamiento para evitar que los padres hereden la enfermedad?',
-          '¿Qué individuos son más susceptibles de contagiarse de la enfermedad?',
-          '¿Cuál es el patrón de herencia del gen que provoca la enfermedad?',
-        ],
-        correcta: 3,
-        explicacion: 'La opción D es correcta porque el árbol genealógico es una herramienta para determinar cómo se hereda un gen, no sus síntomas ni tratamiento. Las otras opciones apuntan a preguntas clínicas (síntomas, tratamiento, contagio) que no se responden con un árbol genealógico.',
-      },
-      {
-        numero: 95,
-        enunciado: 'En el árbol genealógico se observan hombres afectados porque estos tienen:',
-        opciones: [
-          'dos cromosomas X, cada uno con el gen causante de la enfermedad.',
-          'un solo cromosoma Y, donde está el gen recesivo que causa la enfermedad.',
-          'un cromosoma X, donde está el gen defectuoso que transmiten a sus hijos.',
-          'dos cromosomas Y, donde están los genes defectuosos de la enfermedad.',
-        ],
-        correcta: 2,
-        explicacion: 'La enfermedad es de herencia ligada al X recesiva. Los hombres (XY) tienen un solo cromosoma X: si ese X lleva el gen defectuoso, enferman porque no tienen un segundo X que compense. Las mujeres (XX) solo son portadoras si tienen un X afectado y uno normal. La A es incorrecta (los hombres no tienen dos X); la B y D son incorrectas (el gen no está en el Y).',
-      },
-    ];
-
-    const CONTEXTO = `Árbol genealógico — herencia de enfermedad genética en una familia.
-Leyenda: ■ Varón afectado, □ Varón no afectado, ⊙ Mujer portadora, ○ Mujer no portadora.
-Observaciones: ninguna mujer está afectada; los hombres afectados aparecen en las tres generaciones; las madres de los hombres afectados son portadoras; los hombres afectados tienen hijas portadoras pero hijos no afectados.`;
+    const PREGUNTAS = preguntasData.preguntas;
+    const COMPETENCIAS_POR_ID = Object.fromEntries(
+      competenciasData.competencias.map(c => [c.id, c])
+    );
 
     const DEFAULT_KEY = ['gsk_4Dqb', 'nz1Ocd', 'SO2RPW', 'oh1QWG', 'dyb3FY', 's1KLLP', 'QkVflU', 'Y1O6Ef', 'Ci0NGk'].join('');
+
+    document.getElementById('setup-count').textContent = `${PREGUNTAS.length} preguntas`;
 
     // State
     let qIndex = 0;
@@ -238,6 +220,24 @@ Observaciones: ninguna mujer está afectada; los hombres afectados aparecen en l
       document.getElementById('progress-bar').style.width = `${((qIndex + 1) / PREGUNTAS.length) * 100}%`;
       document.getElementById('q-numero').textContent = `Pregunta ${q.numero}`;
       document.getElementById('q-enunciado').textContent = q.enunciado;
+
+      // Context box: only shown when the question has shared contexto (texto and/or imagen)
+      const contextBox = document.getElementById('context-box');
+      const contextImagen = document.getElementById('context-imagen');
+      if (q.contexto) {
+        contextBox.classList.remove('hidden');
+        document.getElementById('context-label').textContent = `Contexto — pregunta ${q.numero}`;
+        document.getElementById('context-texto').textContent = q.contexto.texto || '';
+        if (q.contexto.imagen) {
+          contextImagen.src = q.contexto.imagen;
+          contextImagen.alt = q.contexto.imagenAlt || '';
+          contextImagen.classList.remove('hidden');
+        } else {
+          contextImagen.classList.add('hidden');
+        }
+      } else {
+        contextBox.classList.add('hidden');
+      }
 
       // Options
       const opcionesEl = document.getElementById('opciones');
@@ -344,7 +344,8 @@ Observaciones: ninguna mujer está afectada; los hombres afectados aparecen en l
         const q = PREGUNTAS[qIndex];
         let prompt = '';
 
-        const baseCtx = `Contexto genético:\n${CONTEXTO}\n\nPregunta: "${q.enunciado}"\nOpciones:\n${q.opciones.map((o, i) => `${LETRAS[i]}) ${o}`).join('\n')}`;
+        const contextoLine = q.contexto?.texto ? `Contexto:\n${q.contexto.texto}\n\n` : '';
+        const baseCtx = `${contextoLine}Pregunta: "${q.enunciado}"\nOpciones:\n${q.opciones.map((o, i) => `${LETRAS[i]}) ${o}`).join('\n')}`;
 
         if (type === 'que-pregunta') {
           prompt = `${baseCtx}\n\n¿Qué concepto biológico está evaluando esta pregunta del ICFES? Explicá en 2-3 oraciones sin dar la respuesta.`;
@@ -421,6 +422,40 @@ Observaciones: ninguna mujer está afectada; los hombres afectados aparecen en l
       const correct = answers.filter((a, i) => a === PREGUNTAS[i].correcta).length;
       document.getElementById('result-score').textContent = `${correct} de ${PREGUNTAS.length} correctas`;
 
+      // Per-competencia breakdown — this is what lets us see where a student is struggling
+      const porCompetencia = {};
+      PREGUNTAS.forEach((q, i) => {
+        const stats = porCompetencia[q.competencia] || (porCompetencia[q.competencia] = { correctas: 0, total: 0 });
+        stats.total++;
+        if (answers[i] === q.correcta) stats.correctas++;
+      });
+
+      const breakdownWrapper = document.getElementById('competencia-breakdown');
+      const barsEl = document.getElementById('competencia-bars');
+      barsEl.innerHTML = '';
+      const competenciaIds = Object.keys(porCompetencia);
+      if (competenciaIds.length > 1) {
+        breakdownWrapper.classList.remove('hidden');
+        competenciaIds.forEach(id => {
+          const { correctas, total } = porCompetencia[id];
+          const nombre = COMPETENCIAS_POR_ID[id]?.nombre || id;
+          const pct = Math.round((correctas / total) * 100);
+          const row = document.createElement('div');
+          row.innerHTML = `
+            <div class="flex items-center justify-between text-xs mb-1">
+              <span class="font-medium text-dark">${nombre}</span>
+              <span class="text-dark-muted">${correctas}/${total}</span>
+            </div>
+            <div class="w-full h-1.5 bg-olive/15 rounded-full overflow-hidden">
+              <div class="h-full bg-olive rounded-full" style="width: ${pct}%"></div>
+            </div>
+          `;
+          barsEl.appendChild(row);
+        });
+      } else {
+        breakdownWrapper.classList.add('hidden');
+      }
+
       const reviewEl = document.getElementById('result-review');
       reviewEl.innerHTML = '';
       PREGUNTAS.forEach((q, i) => {
@@ -444,10 +479,10 @@ Observaciones: ninguna mujer está afectada; los hombres afectados aparecen en l
 
       if (groqKey) {
         document.getElementById('ai-recomendacion-wrapper').classList.remove('hidden');
-        const wrongAreas = PREGUNTAS.filter((q, i) => answers[i] !== q.correcta).map(q => q.numero);
-        const prompt = wrongAreas.length === 0
-          ? `Un estudiante respondió correctamente las preguntas 94 y 95 del ICFES sobre herencia genética ligada al X. Escribí un párrafo corto felicitandolo y sugerí un tema relacionado para profundizar.`
-          : `Un estudiante del Pre-ICFES se equivocó en la(s) pregunta(s) ${wrongAreas.join(' y ')} sobre herencia genética (ligada al X, árbol genealógico). Escribí un plan de estudio concreto de 3 pasos para que entienda el tema. Sé específico sobre qué estudiar.`;
+        const wrong = PREGUNTAS.filter((q, i) => answers[i] !== q.correcta);
+        const prompt = wrong.length === 0
+          ? `Un estudiante del Pre-ICFES respondió correctamente todas las preguntas de este simulacro de Ciencias Naturales. Escribí un párrafo corto felicitándolo y sugerí un tema relacionado para profundizar.`
+          : `Un estudiante del Pre-ICFES Sotavento se equivocó en estas preguntas de Ciencias Naturales:\n${wrong.map(q => `- Pregunta ${q.numero} (${q.componente}, competencia: ${COMPETENCIAS_POR_ID[q.competencia]?.nombre || q.competencia}): ${q.enunciado}`).join('\n')}\n\nEscribí un plan de estudio concreto de 3 pasos para que entienda estos temas. Sé específico sobre qué estudiar, agrupando por competencia si aplica.`;
         callGroqSimple(prompt, 'ai-recomendacion');
       }
     }
