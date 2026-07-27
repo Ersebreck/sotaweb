@@ -1,3 +1,10 @@
+## Git Workflow
+
+- Never commit directly to `main`. Before making any change, create a branch: `git checkout -b <type>/<short-description>` (e.g. `feat/review-queue`, `fix/date-parsing`).
+- Commit your work on that branch, push it, and open a pull request into `main` instead of pushing straight to `main`.
+- If you find yourself on `main` with pending changes, create and switch to a branch first, then commit there.
+- One branch/PR per task keeps history reviewable and lets the team see what's shipped vs. still in progress.
+
 ## Development
 
 When starting the dev server, use background mode:
