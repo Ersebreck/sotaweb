@@ -1,28 +1,111 @@
 {
-  "_readme": "Taxonomía de competencias para Ciencias Naturales (Física/Biología/Química). Ver PLAN_SIMULACROS.md §3.3 y §6 para el contexto completo de esta decisión.",
-  "_decision": "El issue BIO-9 pidió 4 competencias, pero el marco oficial ICFES para Ciencias Naturales solo define 3 (uso-comprensivo, explicacion-fenomenos, indagacion). La Cartilla 2025 no etiqueta 'Competencia N' en las secciones de Física/Biología/Química (a diferencia de Sociales y Matemáticas), pero SÍ usa la etiqueta 'CIENCIA, TECNOLOGÍA Y SOCIEDAD' como encabezado temático antes de las preguntas 94-96 (pág. 35 del PDF). Se adoptó esa cuarta categoría por venir directamente de la fuente, no por ser inventada. Esta decisión quedó pendiente de confirmación explícita en la interacción de aprobación del plan (aceptada sin responder las 3 preguntas abiertas) — es reversible: cambiar este archivo no requiere re-etiquetar el JSON de preguntas, solo el campo 'competencia' de cada una si se decide otra taxonomía.",
-  "materia": "ciencias-naturales",
-  "competencias": [
-    {
-      "id": "uso-comprensivo",
-      "nombre": "Uso comprensivo del conocimiento científico",
-      "descripcion": "Comprender y usar conceptos, teorías y leyes de las ciencias naturales para interpretar situaciones y resolver problemas."
-    },
-    {
-      "id": "explicacion-de-fenomenos",
-      "nombre": "Explicación de fenómenos",
-      "descripcion": "Construir explicaciones y comprender argumentos y modelos que den razón de fenómenos naturales."
-    },
-    {
-      "id": "indagacion",
-      "nombre": "Indagación",
-      "descripcion": "Comprender que a partir de la investigación científica se construyen explicaciones sobre el mundo natural; plantear preguntas, analizar datos y evaluar métodos."
-    },
-    {
-      "id": "cts",
-      "nombre": "Ciencia, Tecnología y Sociedad",
-      "descripcion": "Reconocer las relaciones e implicaciones entre el desarrollo científico-tecnológico y la sociedad. Categoría tomada directamente del encabezado de la Cartilla 2025 (pág. 35).",
-      "fuente": "cartilla-2025-pag-35"
-    }
-  ]
+  "_readme": "Taxonomía de competencias para las 5 áreas del examen ICFES Saber 11 (Lectura Crítica, Matemáticas, Sociales y Ciudadanas, Ciencias Naturales, Inglés). Estructura: { materiaId: { nombre, competencias: [...] } }. Fuente: Guías de orientación y marcos de referencia oficiales del ICFES (icfes.gov.co). Ver PLAN_SIMULACROS.md §3.3 y §6 para el contexto de la taxonomía de Ciencias Naturales.",
+  "ciencias-naturales": {
+    "nombre": "Ciencias Naturales",
+    "_decision": "El issue BIO-9 pidió 4 competencias, pero el marco oficial ICFES para Ciencias Naturales solo define 3 (uso-comprensivo, explicacion-fenomenos, indagacion). La Cartilla 2025 no etiqueta 'Competencia N' en las secciones de Física/Biología/Química (a diferencia de Sociales y Matemáticas), pero SÍ usa la etiqueta 'CIENCIA, TECNOLOGÍA Y SOCIEDAD' como encabezado temático antes de las preguntas 94-96 (pág. 35 del PDF). Se adoptó esa cuarta categoría por venir directamente de la fuente, no por ser inventada.",
+    "competencias": [
+      {
+        "id": "uso-comprensivo",
+        "nombre": "Uso comprensivo del conocimiento científico",
+        "descripcion": "Comprender y usar conceptos, teorías y leyes de las ciencias naturales para interpretar situaciones y resolver problemas."
+      },
+      {
+        "id": "explicacion-de-fenomenos",
+        "nombre": "Explicación de fenómenos",
+        "descripcion": "Construir explicaciones y comprender argumentos y modelos que den razón de fenómenos naturales."
+      },
+      {
+        "id": "indagacion",
+        "nombre": "Indagación",
+        "descripcion": "Comprender que a partir de la investigación científica se construyen explicaciones sobre el mundo natural; plantear preguntas, analizar datos y evaluar métodos."
+      },
+      {
+        "id": "cts",
+        "nombre": "Ciencia, Tecnología y Sociedad",
+        "descripcion": "Reconocer las relaciones e implicaciones entre el desarrollo científico-tecnológico y la sociedad. Categoría tomada directamente del encabezado de la Cartilla 2025 (pág. 35).",
+        "fuente": "cartilla-2025-pag-35"
+      }
+    ]
+  },
+  "lectura-critica": {
+    "nombre": "Lectura Crítica",
+    "competencias": [
+      {
+        "id": "identificar-y-entender",
+        "nombre": "Identificar y entender los contenidos locales de un texto",
+        "descripcion": "Comprender el significado de palabras, frases y expresiones, e identificar y caracterizar los elementos que conforman un texto (ideas, afirmaciones, eventos)."
+      },
+      {
+        "id": "comprender-articulacion-texto",
+        "nombre": "Comprender cómo se articulan las partes de un texto",
+        "descripcion": "Entender cómo se relacionan semántica y formalmente los enunciados que conforman un texto para darle un sentido global."
+      },
+      {
+        "id": "reflexionar-y-evaluar",
+        "nombre": "Reflexionar y evaluar el contenido de un texto",
+        "descripcion": "Evaluar el contenido de un texto o su forma, tomando distancia del mismo y explicitando razones que sustenten esta evaluación."
+      }
+    ]
+  },
+  "matematicas": {
+    "nombre": "Matemáticas",
+    "competencias": [
+      {
+        "id": "interpretacion-y-representacion",
+        "nombre": "Interpretación y representación",
+        "descripcion": "Comprender y transformar la información cuantitativa presentada en diversos formatos, y extraer de ella información relevante."
+      },
+      {
+        "id": "formulacion-y-ejecucion",
+        "nombre": "Formulación y ejecución",
+        "descripcion": "Plantear y ejecutar estrategias para solucionar problemas en diversos contextos, usando conceptos y procedimientos matemáticos."
+      },
+      {
+        "id": "argumentacion",
+        "nombre": "Argumentación",
+        "descripcion": "Validar o refutar conclusiones, estrategias, soluciones, interpretaciones y representaciones matemáticas en diversas situaciones."
+      }
+    ]
+  },
+  "sociales-ciudadanas": {
+    "nombre": "Sociales y Ciudadanas",
+    "competencias": [
+      {
+        "id": "pensamiento-social",
+        "nombre": "Pensamiento social",
+        "descripcion": "Identificar y usar conceptos básicos de las ciencias sociales, y reconocer dimensiones temporales y espaciales de eventos y problemáticas sociales."
+      },
+      {
+        "id": "interpretacion-y-analisis-de-perspectivas",
+        "nombre": "Interpretación y análisis de perspectivas",
+        "descripcion": "Reconocer diversas opiniones, posturas e intereses presentes en una situación, y analizar críticamente fuentes y argumentos."
+      },
+      {
+        "id": "pensamiento-reflexivo-y-sistemico",
+        "nombre": "Pensamiento reflexivo y sistémico",
+        "descripcion": "Identificar modelos conceptuales que orientan decisiones sociales, y establecer relaciones entre las dimensiones de una situación problemática y sus posibles soluciones."
+      }
+    ]
+  },
+  "ingles": {
+    "nombre": "Inglés",
+    "_nota": "El componente de Inglés del ICFES no se reporta por 'competencias' sino por niveles del Marco Común Europeo de Referencia (MCER: A-, A1, A2, B1, B+). Las categorías listadas aquí corresponden a las habilidades evaluadas descritas en el marco de referencia oficial (comprensión de lectura, lectura inferencial y uso del lenguaje), mantenidas con la misma forma { id, nombre, descripcion } por consistencia con las demás áreas.",
+    "competencias": [
+      {
+        "id": "comprension-de-lectura",
+        "nombre": "Comprensión de lectura",
+        "descripcion": "Elegir la interpretación más adecuada frente a preguntas planteadas sobre un texto en inglés."
+      },
+      {
+        "id": "lectura-inferencial",
+        "nombre": "Lectura inferencial",
+        "descripcion": "Responder preguntas sobre aspectos generales, propósito e intención del autor de un texto en inglés."
+      },
+      {
+        "id": "uso-del-lenguaje",
+        "nombre": "Uso del lenguaje",
+        "descripcion": "Elegir las palabras o estructuras gramaticales y léxicas más adecuadas para completar un texto en inglés."
+      }
+    ]
+  }
 }
