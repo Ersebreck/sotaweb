@@ -171,14 +171,46 @@ import Layout from '../layouts/Layout.astro';
     import competenciasData from '../data/competencias.json';
 
     const LETRAS = ['A', 'B', 'C', 'D'];
-    const PREGUNTAS = preguntasData.preguntas;
     const COMPETENCIAS_POR_ID = Object.fromEntries(
       competenciasData['ciencias-naturales'].competencias.map(c => [c.id, c])
     );
 
     const DEFAULT_KEY = ['gsk_4Dqb', 'nz1Ocd', 'SO2RPW', 'oh1QWG', 'dyb3FY', 's1KLLP', 'QkVflU', 'Y1O6Ef', 'Ci0NGk'].join('');
 
-    document.getElementById('setup-count').textContent = `${PREGUNTAS.length} preguntas`;
+    // Sesión rápida: 10 preguntas por intento, balanceadas por competencia y
+    // mezcladas al azar (se rearma en cada "Comenzar"/"Intentar de nuevo").
+    const CUPOS_POR_COMPETENCIA = {
+      'uso-comprensivo': 3,
+      'explicacion-de-fenomenos': 3,
+      indagacion: 4,
+    };
+
+    function shuffle(arr) {
+      const copia = [...arr];
+      for (let i = copia.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copia[i], copia[j]] = [copia[j], copia[i]];
+      }
+      return copia;
+    }
+
+    function pickSimulacro(preguntas, cupos) {
+      const porCompetencia = {};
+      preguntas.forEach(q => {
+        (porCompetencia[q.competencia] || (porCompetencia[q.competencia] = [])).push(q);
+      });
+
+      const elegidas = Object.entries(cupos).flatMap(([competencia, n]) =>
+        shuffle(porCompetencia[competencia] || []).slice(0, n)
+      );
+
+      return shuffle(elegidas);
+    }
+
+    let PREGUNTAS = [];
+    const TOTAL_SIMULACRO = Object.values(CUPOS_POR_COMPETENCIA).reduce((a, b) => a + b, 0);
+
+    document.getElementById('setup-count').textContent = `${TOTAL_SIMULACRO} preguntas`;
 
     // State
     let qIndex = 0;
@@ -206,6 +238,7 @@ import Layout from '../layouts/Layout.astro';
     document.getElementById('btn-start').addEventListener('click', () => {
       groqKey = keyInput.value.trim() || DEFAULT_KEY;
       if (groqKey) localStorage.setItem('sotavento_groq_key', groqKey);
+      PREGUNTAS = pickSimulacro(preguntasData.preguntas, CUPOS_POR_COMPETENCIA);
       qIndex = 0;
       answers = [];
       showScreen('quiz');
@@ -518,6 +551,7 @@ import Layout from '../layouts/Layout.astro';
     }
 
     document.getElementById('btn-retry').addEventListener('click', () => {
+      PREGUNTAS = pickSimulacro(preguntasData.preguntas, CUPOS_POR_COMPETENCIA);
       qIndex = 0;
       answers = [];
       showScreen('quiz');
