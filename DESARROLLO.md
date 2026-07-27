@@ -47,6 +47,7 @@
 ## Roadmap
 
 ### Fase 2 — Simulacro completo
+> Plan detallado (auditoría de fuentes en `Insumos/`, pipeline de extracción/imágenes/competencias): ver [`PLAN_SIMULACROS.md`](./PLAN_SIMULACROS.md).
 - [ ] Banco de preguntas por área (todas las 6 áreas del ICFES)
 - [ ] Preguntas reales de la Cartilla Sotavento
 - [ ] Sistema de "trae tu propia clave Groq"
