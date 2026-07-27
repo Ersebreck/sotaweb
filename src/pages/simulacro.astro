@@ -173,7 +173,7 @@ import Layout from '../layouts/Layout.astro';
     const LETRAS = ['A', 'B', 'C', 'D'];
     const PREGUNTAS = preguntasData.preguntas;
     const COMPETENCIAS_POR_ID = Object.fromEntries(
-      competenciasData.competencias.map(c => [c.id, c])
+      competenciasData['ciencias-naturales'].competencias.map(c => [c.id, c])
     );
 
     const DEFAULT_KEY = ['gsk_4Dqb', 'nz1Ocd', 'SO2RPW', 'oh1QWG', 'dyb3FY', 's1KLLP', 'QkVflU', 'Y1O6Ef', 'Ci0NGk'].join('');
