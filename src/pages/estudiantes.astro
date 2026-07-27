@@ -57,7 +57,7 @@ const areas = [
 const simulacros = [
   { area: 'Lectura crítica', url: null },
   { area: 'Matemáticas', url: null },
-  { area: 'Ciencias naturales', url: null },
+  { area: 'Ciencias naturales', url: '/sotaweb/simulacro' },
   { area: 'Ciencias sociales', url: null },
   { area: 'Inglés', url: null },
   { area: 'Competencias ciudadanas', url: null },
@@ -211,33 +211,53 @@ const simulacros = [
       <h2 class="font-display text-4xl font-semibold text-cream-light mb-4 leading-tight">
         Practica antes del día
       </h2>
-      <p class="text-cream/60 text-sm leading-relaxed mb-6 max-w-xl">
+      <p class="text-cream/60 text-sm leading-relaxed mb-10 max-w-xl">
         Simulacros cronometrados por área, con las mismas condiciones de la prueba real.
       </p>
-      <a href="/sotaweb/simulacro" class="inline-flex items-center gap-2 px-5 py-2.5 bg-olive text-cream-light text-sm font-medium rounded-sm hover:bg-olive-dark transition-colors mb-12">
-        ✦ Simulacro rápido — Ciencias Naturales
-      </a>
 
+      <p class="text-xs font-medium text-olive uppercase tracking-wider mb-4">Simulacros rápidos</p>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
+        {simulacros.map(({ area, url }) => {
+          const esCienciasNaturales = area === 'Ciencias naturales';
+          return (
+            <div class={`border rounded-sm p-5 transition-colors ${url ? 'border-olive/40 hover:border-olive cursor-pointer' : 'border-cream/10'}`}>
+              <p class="text-sm font-medium text-cream/80 mb-3">{area}</p>
+              {url ? (
+                esCienciasNaturales ? (
+                  <a
+                    href={url}
+                    class="inline-flex items-center gap-2 px-3 py-1.5 bg-olive text-cream-light text-xs font-medium rounded-sm hover:bg-olive-dark transition-colors"
+                  >
+                    ✦ Ir al simulacro →
+                  </a>
+                ) : (
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-xs text-olive hover:text-olive-dark font-medium transition-colors"
+                  >
+                    Ir al simulacro →
+                  </a>
+                )
+              ) : (
+                <span class="text-xs text-cream/30 border border-dashed border-cream/15 rounded-sm px-2 py-1 inline-block">
+                  Próximamente
+                </span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <p class="text-xs font-medium text-olive uppercase tracking-wider mb-4">Simulacro completo</p>
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {simulacros.map(({ area, url }) => (
-          <div class={`border rounded-sm p-5 transition-colors ${url ? 'border-olive/40 hover:border-olive cursor-pointer' : 'border-cream/10'}`}>
-            <p class="text-sm font-medium text-cream/80 mb-3">{area}</p>
-            {url ? (
-              <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-xs text-olive hover:text-olive-dark font-medium transition-colors"
-              >
-                Ir al simulacro →
-              </a>
-            ) : (
-              <span class="text-xs text-cream/30 border border-dashed border-cream/15 rounded-sm px-2 py-1 inline-block">
-                Próximamente
-              </span>
-            )}
-          </div>
-        ))}
+        <div class="border border-cream/10 rounded-sm p-5">
+          <p class="text-sm font-medium text-cream/80 mb-3">Todas las áreas — ICFES completo</p>
+          <span class="text-xs text-cream/30 border border-dashed border-cream/15 rounded-sm px-2 py-1 inline-block">
+            Próximamente
+          </span>
+        </div>
       </div>
     </div>
   </section>
