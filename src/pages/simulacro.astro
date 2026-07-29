@@ -69,16 +69,17 @@ import Layout from '../layouts/Layout.astro';
         />
       </div>
 
-      <!-- Two-column: image stays in context above, now AI panel beside question -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+      <!-- Question: full width, so the enunciado gets room to breathe -->
+      <div class="mb-8">
+        <p class="text-xs font-medium text-dark-muted uppercase tracking-widest mb-3" id="q-numero">Pregunta 94</p>
+        <p class="font-display text-xl font-semibold text-dark leading-snug" id="q-enunciado"></p>
+      </div>
 
-        <!-- Left: question + options + feedback + next -->
+      <!-- Two-column: answer options next to the AI panel -->
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8 items-start">
+
+        <!-- Left: options + feedback + next -->
         <div>
-          <div class="mb-8">
-            <p class="text-xs font-medium text-dark-muted uppercase tracking-widest mb-3" id="q-numero">Pregunta 94</p>
-            <p class="font-display text-xl font-semibold text-dark leading-snug" id="q-enunciado"></p>
-          </div>
-
           <div id="opciones" class="space-y-3 mb-8"></div>
 
           <div id="feedback" class="hidden mb-6 p-5 rounded-sm border text-sm leading-relaxed"></div>
